@@ -1,6 +1,7 @@
 {
   "packages": [
-    "packages/*"
+    "packages/*",
+    "example_sketches"
   ],
   "version": "0.0.2"
 }

@@ -1,0 +1,19 @@
+{
+  "name": "example_sketches",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "rapid-sketch sketch1.ts"
+  },
+  "dependencies": {
+    "rapid-sketch": "0.0.2",
+    "rapid-sketch-cli": "0.0.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}

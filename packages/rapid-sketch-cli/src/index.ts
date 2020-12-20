@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import openBrowser from "open";
 import getPort from "get-port";
 import express from "express";
@@ -16,7 +14,7 @@ import { bufferToStream } from "./utils/bufferToStream";
 
 const SAVE_DIR = "output";
 
-program.version(require("./package.json").version);
+program.version("0.0.1");
 
 program
   .arguments("<sketchFile>")

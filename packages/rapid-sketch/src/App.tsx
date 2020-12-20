@@ -10,7 +10,7 @@ import {
   saveBlob3,
   startStream,
 } from "./utils";
-import { ISettings } from "./main";
+import { ISettings } from ".";
 import mime from "mime-types";
 import { CommandBar } from "./components/CommandBar";
 

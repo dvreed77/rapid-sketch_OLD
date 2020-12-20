@@ -1,5 +1,5 @@
 import { T_UNITS, convertDistance } from "./utils/convertDistance";
-import { ISettings } from ".";
+import { ISettings } from "./main";
 // import { createBlobFromDataURL, saveBlob } from "./utils";
 // import mime from "mime-types";
 import React from "react";

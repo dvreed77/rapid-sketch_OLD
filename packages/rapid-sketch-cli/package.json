@@ -1,11 +1,14 @@
 {
-  "name": "rapid-sketch",
+  "name": "rapid-sketch-cli",
   "version": "0.0.2",
   "author": "Dave Reed <dvreed77@gmail.com>",
   "homepage": "",
-  "description": "A utility for rapid canvas sketches",
+  "description": "CLI tool for rapid-sketch",
   "main": "dist/index",
   "typings": "dist/index",
+  "bin": {
+    "rapid-sketch": "./dist/index.js"
+  },
   "license": "ISC",
   "directories": {
     "lib": "lib",
