@@ -37,7 +37,7 @@ canvasSketch(
     renderer.render(scene, camera);
 
     return (a) => {
-      console.log("AAA", a);
+      console.log("AAAAss", a);
     };
   },
   {

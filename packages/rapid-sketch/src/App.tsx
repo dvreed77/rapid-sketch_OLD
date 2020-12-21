@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
 import {
@@ -25,8 +25,11 @@ function useRefState(
   return [stateRef, setState];
 }
 
+
+
 const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   const [width, height] = settings.dimensions;
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [frame, setFrame] = useRefState(0);
   const [canvasProps, setCanvasProps] = useState({
@@ -35,7 +38,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     width: null,
     height: null,
   });
-  // const [renderFunc, setRenderFunc] = useState<any>();
+
   const renderFunc = useRef();
   document.title = `${settings.name} | RapidSketch`;
 
@@ -74,29 +77,29 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     console.log("R", rFunc);
     // setRenderFunc(rFunc);
     renderFunc.current = rFunc;
-    // function handleUserKeyPress(e: KeyboardEvent) {
-    //   if (e.code === "KeyS" && !e.altKey && e.metaKey) {
-    //     e.preventDefault();
-    //     const dataURL = canvasProps.canvas.toDataURL();
-    //     createBlobFromDataURL(dataURL).then((blob: any) => {
-    //       saveBlob(blob, settings.name);
-    //     });
-    //   } else if (e.code === "KeyP" && !e.altKey && e.metaKey) {
-    //     e.preventDefault();
+    function handleUserKeyPress(e: KeyboardEvent) {
+      if (e.code === "KeyS" && !e.altKey && e.metaKey) {
+        e.preventDefault();
+        const dataURL = canvasProps.canvas.toDataURL();
+        createBlobFromDataURL(dataURL).then((blob: any) => {
+          saveBlob(blob, settings.name);
+        });
+      } else if (e.code === "KeyP" && !e.altKey && e.metaKey) {
+        e.preventDefault();
 
-    //     // TODO: better name than r
-    //     // const r = renderFunc({ context, width, height });
+        // TODO: better name than r
+        // const r = renderFunc({ context, width, height });
 
-    //     // r.forEach(({ data, extension }) => {
-    //     //   const blob = new Blob([data], {
-    //     //     type: mime.getType(extension) as string,
-    //     //   });
-    //     //   saveBlob(blob, settings.name);
-    //     // });
-    //   } else if (e.code === "KeyR") {
-    //     render();
-    //   }
-    // }
+        // r.forEach(({ data, extension }) => {
+        //   const blob = new Blob([data], {
+        //     type: mime.getType(extension) as string,
+        //   });
+        //   saveBlob(blob, settings.name);
+        // });
+      } else if (e.code === "KeyR") {
+        render();
+      }
+    }
 
     // window.addEventListener("keydown", handleUserKeyPress);
 
@@ -163,7 +166,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
 
   function render() {
     const { context, width, height } = canvasProps;
-    const rFunc = renderFunc.current;
+    const rFunc = renderFunc.current as any;
     if (rFunc !== undefined) {
       rFunc({ context, width, height, frame: frame.current });
     }

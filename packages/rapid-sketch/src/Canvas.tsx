@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
+import { useWindowSize } from "./hooks/useWindowResize";
 import { convertDistance } from "./utils/convertDistance";
 
 export function Canvas({ width, height, setCanvasProps, contextType }) {
   const canvasRef = useRef(null);
+  const [windowWidth, windowHeight] = useWindowSize()
 
   useEffect(() => {
     const units = "px";
@@ -16,14 +18,13 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
       precision: 4,
     });
     // Calculate Canvas Style Size
-    const [parentWidth, parentHeight] = [window.innerWidth, window.innerHeight];
     let styleWidth = Math.round(realWidth);
     let styleHeight = Math.round(realHeight);
     const aspect = width / height;
-    const windowAspect = parentWidth / parentHeight;
+    const windowAspect = windowWidth / windowHeight;
     const scaleToFitPadding = 40;
-    const maxWidth = Math.round(parentWidth - scaleToFitPadding * 2);
-    const maxHeight = Math.round(parentHeight - scaleToFitPadding * 2);
+    const maxWidth = Math.round(windowWidth - scaleToFitPadding * 2);
+    const maxHeight = Math.round(windowHeight - scaleToFitPadding * 2);
     if (styleWidth > maxWidth || styleHeight > maxHeight) {
       if (windowAspect > aspect) {
         styleHeight = maxHeight;
@@ -56,12 +57,7 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
       width: canvasWidth,
       height: canvasHeight,
     });
-
-    // context.scale(scaleX, scaleY);
-
-    // render({ context, width, height });
-    // sketch()({ context, width, height });
-  }, []);
+  }, [windowWidth, windowHeight]);
 
   return <canvas ref={canvasRef}></canvas>;
 }
