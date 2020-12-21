@@ -34,7 +34,7 @@ const options = {
   sourceMaps: true,
   hmrHostname: "",
   detailedReport: false,
-  autoInstall: true,
+  autoInstall: false,
 } as ParcelBundler.ParcelOptions;
 
 (async function () {

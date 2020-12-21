@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { convertDistance } from "./utils/convertDistance";
 
-export function Canvas({ width, height, setCanvasProps }) {
+export function Canvas({ width, height, setCanvasProps, contextType }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export function Canvas({ width, height, setCanvasProps }) {
     canvasRef.current.style.width = `${styleWidth}px`;
     canvasRef.current.style.height = `${styleHeight}px`;
 
-    const context = canvasRef.current.getContext("2d");
+    const context = canvasRef.current.getContext(contextType || "2d");
 
     setCanvasProps({
       canvas: canvasRef.current,

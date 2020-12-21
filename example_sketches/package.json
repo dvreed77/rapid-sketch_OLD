@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "rapid-sketch": "0.0.2",
-    "rapid-sketch-cli": "0.0.2"
+    "rapid-sketch-cli": "0.0.2",
+    "three": "^0.123.0"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",

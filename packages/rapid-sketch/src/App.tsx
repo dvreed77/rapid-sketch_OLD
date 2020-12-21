@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
-
 import {
   createBlobFromDataURL,
   endStream,
@@ -9,9 +9,7 @@ import {
   saveBlob3,
   startStream,
 } from "./utils";
-import { ISettings } from ".";
 import mime from "mime";
-import { CommandBar } from "./components/CommandBar";
 
 function useRefState(
   initialState: any
@@ -37,6 +35,8 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     width: null,
     height: null,
   });
+  // const [renderFunc, setRenderFunc] = useState<any>();
+  const renderFunc = useRef();
   document.title = `${settings.name} | RapidSketch`;
 
   useEffect(() => {
@@ -62,41 +62,51 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   }, []);
 
   useEffect(() => {
-    function handleUserKeyPress(e: KeyboardEvent) {
-      if (e.code === "KeyS" && !e.altKey && e.metaKey) {
-        e.preventDefault();
-        const dataURL = canvasProps.canvas.toDataURL();
-        createBlobFromDataURL(dataURL).then((blob: any) => {
-          saveBlob(blob, settings.name);
-        });
-      } else if (e.code === "KeyP" && !e.altKey && e.metaKey) {
-        e.preventDefault();
+    if (!canvasProps) return;
+    console.log("CCC", canvasProps);
+    const { context, width, height } = canvasProps;
+    if (!context) return;
+    console.log(context);
+    const rFunc = sketch({ context, width, height });
 
-        const { context, width, height } = canvasProps;
+    rFunc({ context, width, height });
 
-        // TODO: better name than r
-        const r = sketch()({ context, width, height });
+    console.log("R", rFunc);
+    // setRenderFunc(rFunc);
+    renderFunc.current = rFunc;
+    // function handleUserKeyPress(e: KeyboardEvent) {
+    //   if (e.code === "KeyS" && !e.altKey && e.metaKey) {
+    //     e.preventDefault();
+    //     const dataURL = canvasProps.canvas.toDataURL();
+    //     createBlobFromDataURL(dataURL).then((blob: any) => {
+    //       saveBlob(blob, settings.name);
+    //     });
+    //   } else if (e.code === "KeyP" && !e.altKey && e.metaKey) {
+    //     e.preventDefault();
 
-        r.forEach(({ data, extension }) => {
-          const blob = new Blob([data], {
-            type: mime.getType(extension) as string,
-          });
-          saveBlob(blob, settings.name);
-        });
-      } else if (e.code === "KeyR") {
-        render();
-      }
-    }
+    //     // TODO: better name than r
+    //     // const r = renderFunc({ context, width, height });
 
-    window.addEventListener("keydown", handleUserKeyPress);
+    //     // r.forEach(({ data, extension }) => {
+    //     //   const blob = new Blob([data], {
+    //     //     type: mime.getType(extension) as string,
+    //     //   });
+    //     //   saveBlob(blob, settings.name);
+    //     // });
+    //   } else if (e.code === "KeyR") {
+    //     render();
+    //   }
+    // }
 
-    if (canvasProps.context) {
-      render();
-    }
+    // window.addEventListener("keydown", handleUserKeyPress);
 
-    return () => {
-      window.removeEventListener("keydown", handleUserKeyPress);
-    };
+    // if (canvasProps.context) {
+    //   render();
+    // }
+
+    // return () => {
+    //   window.removeEventListener("keydown", handleUserKeyPress);
+    // };
   }, [canvasProps]);
 
   const requestRef = React.useRef(null);
@@ -153,8 +163,10 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
 
   function render() {
     const { context, width, height } = canvasProps;
-    if (!context) return;
-    sketch()({ context, width, height, frame: frame.current });
+    const rFunc = renderFunc.current;
+    if (rFunc !== undefined) {
+      rFunc({ context, width, height, frame: frame.current });
+    }
   }
 
   async function record() {
@@ -176,7 +188,12 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   return (
     <div>
       <div className="pt-5">
-        <Canvas width={width} height={height} setCanvasProps={setCanvasProps} />
+        <Canvas
+          width={width}
+          height={height}
+          setCanvasProps={setCanvasProps}
+          contextType={settings.context}
+        />
       </div>
       <CommandBar
         settings={settings}
