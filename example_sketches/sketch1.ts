@@ -1,4 +1,3 @@
-// import { canvasSketch, ISettings } from "rapid-sketch";
 import { canvasSketch, ISettings } from "rapid-sketch";
 
 const settings: ISettings = {
@@ -14,7 +13,7 @@ canvasSketch(() => {
     context.moveTo(Math.random() * width, Math.random() * height);
     context.lineTo(100, 100);
 
-    context.lineWidth = 2;
+    context.lineWidth = 4;
     context.stroke();
   };
 }, settings);

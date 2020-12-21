@@ -3,5 +3,11 @@
   "private": true,
   "devDependencies": {
     "lerna": "^3.22.1"
+  },
+  "scripts": {
+    "start": "lerna run start --stream --parallel"
+  },
+  "volta": {
+    "node": "12.20.0"
   }
 }

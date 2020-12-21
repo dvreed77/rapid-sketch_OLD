@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Canvas } from "./Canvas";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
 import {
   createBlobFromDataURL,
@@ -11,7 +10,7 @@ import {
   startStream,
 } from "./utils";
 import { ISettings } from ".";
-import mime from "mime-types";
+import mime from "mime";
 import { CommandBar } from "./components/CommandBar";
 
 function useRefState(
@@ -28,13 +27,7 @@ function useRefState(
   return [stateRef, setState];
 }
 
-export function App({
-  sketch,
-  settings,
-}: {
-  sketch: any;
-  settings: ISettings;
-}) {
+const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   const [width, height] = settings.dimensions;
   const [isPlaying, setIsPlaying] = useState(false);
   const [frame, setFrame] = useRefState(0);
@@ -86,7 +79,7 @@ export function App({
 
         r.forEach(({ data, extension }) => {
           const blob = new Blob([data], {
-            type: mime.lookup(extension) as string,
+            type: mime.getType(extension) as string,
           });
           saveBlob(blob, settings.name);
         });
@@ -195,4 +188,6 @@ export function App({
       />
     </div>
   );
-}
+};
+
+export default App;

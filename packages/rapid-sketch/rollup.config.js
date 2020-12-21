@@ -1,16 +1,31 @@
 import typescript from "rollup-plugin-typescript2";
-import copy from "rollup-plugin-copy";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import postcss from "rollup-plugin-postcss";
+// import babel from "rollup-plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
+import pkg from "./package.json";
+import json from "@rollup/plugin-json";
 
 export default {
   input: "src/index.ts",
-  output: {
-    file: "dist/index.js",
-    format: "cjs",
-  },
+  output: [
+    {
+      file: pkg.main,
+      format: "cjs",
+    },
+    {
+      file: pkg.module,
+      format: "esm",
+    },
+  ],
   plugins: [
     typescript(),
-    copy({
-      targets: [{ src: "src/index.html", dest: "dist/" }],
-    }),
+    postcss(),
+    // babel({
+    //   exclude: "node_modules/**",
+    // }),
+    nodeResolve(),
+    commonjs(),
+    json(),
   ],
 };

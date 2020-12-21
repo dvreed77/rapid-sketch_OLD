@@ -51,7 +51,7 @@ export function createStream(opts: IProps = initialArgs) {
 
   const args = buildMp4Args({ output });
 
-  const promise = new Promise((resolve, reject) => {
+  const promise = new Promise<void>((resolve, reject) => {
     //   logCommand(cmd, args);
     const ffmpeg = spawn(cmd, args);
     const { stdin, stdout, stderr } = ffmpeg;

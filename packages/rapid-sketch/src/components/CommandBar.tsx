@@ -1,5 +1,4 @@
 import React from "react";
-import { Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -75,13 +74,11 @@ export function CommandBar({
           icon={faFastForward}
         />
 
-        <Tooltip title="Record Animation">
-          <FontAwesomeIcon
-            className="fill-current text-gray-500 hover:text-gray-600 cursor-pointer mx-1"
-            onClick={() => record()}
-            icon={faFileVideo}
-          />
-        </Tooltip>
+        <FontAwesomeIcon
+          className="fill-current text-gray-500 hover:text-gray-600 cursor-pointer mx-1"
+          onClick={() => record()}
+          icon={faFileVideo}
+        />
       </span>
     </div>
   ) : null;
