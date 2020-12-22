@@ -1,11 +1,7 @@
 # `rapid-sketch`
 
-> TODO: description
+> WORK IN PROGRESS
 
-## Usage
+`rapid-sketch` is tool to aid in the creation of generative art in the browser.
 
-```
-const rapidSketch = require('rapid-sketch');
-
-// TODO: DEMONSTRATE API
-```
+It heavily borrows concepts and architecture from [`canvas-sketch`](https://www.npmjs.com/package/canvas-sketch), but built using typescript, react, and parcel.
