@@ -62,16 +62,19 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     };
   }, []);
 
+  function initialize() {
+    const { context, width, height } = canvasProps;
+    if (!context) return;
+
+    const rFunc = sketch({ context, width, height });
+    rFunc({ context, width, height, frame: frame.current });
+    renderFunc.current = rFunc;
+  }
+
   useEffect(() => {
     if (!canvasProps) return;
 
-    const { context, width, height } = canvasProps;
-    if (!context) return;
-    const rFunc = sketch({ context, width, height });
-
-    rFunc({ context, width, height, frame: frame.current });
-
-    renderFunc.current = rFunc;
+    initialize();
     function handleUserKeyPress(e: KeyboardEvent) {
       if (e.code === "KeyS" && !e.altKey && e.metaKey) {
         e.preventDefault();
@@ -92,19 +95,16 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
         //   saveBlob(blob, settings.name);
         // });
       } else if (e.code === "KeyR") {
+        initialize();
         render();
       }
     }
 
-    // window.addEventListener("keydown", handleUserKeyPress);
+    window.addEventListener("keydown", handleUserKeyPress);
 
-    // if (canvasProps.context) {
-    //   render();
-    // }
-
-    // return () => {
-    //   window.removeEventListener("keydown", handleUserKeyPress);
-    // };
+    return () => {
+      window.removeEventListener("keydown", handleUserKeyPress);
+    };
   }, [canvasProps]);
 
   const requestRef = React.useRef(null);
@@ -153,12 +153,6 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
 
     return () => cancelAnimationFrame(requestRef.current);
   }, [isPlaying]);
-
-  // if (frame.current < settings.totalFrames) {
-  //   render();
-  // } else {
-  //   setIsPlaying(false);
-  // }
 
   React.useEffect(() => {
     if (frame.current < settings.totalFrames) {
