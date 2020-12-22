@@ -1,6 +1,6 @@
 {
   "name": "rapid-sketch-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Dave Reed <dvreed77@gmail.com>",
   "homepage": "",
   "description": "CLI tool for rapid-sketch",
@@ -34,8 +34,8 @@
     "multer": "^1.4.2",
     "open": "7.0.4",
     "parcel-bundler": "^1.12.4",
-    "resolve-global": "^1.0.0",
-    "rapid-sketch": "0.0.2"
+    "rapid-sketch": "^0.0.3",
+    "resolve-global": "^1.0.0"
   },
   "devDependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
