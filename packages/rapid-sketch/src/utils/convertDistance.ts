@@ -3,8 +3,6 @@
 import { defined } from "./defined";
 var units = ["mm", "cm", "m", "pc", "pt", "in", "ft", "px"];
 
-export type T_UNITS = "mm" | "cm" | "m" | "pc" | "pt" | "in" | "ft" | "px";
-
 const conversions = {
   // metric
   m: {
