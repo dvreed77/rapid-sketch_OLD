@@ -34,15 +34,21 @@ canvasSketch(
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    renderer.render(scene, camera);
+    // renderer.render(scene, camera);
 
-    return (a) => {
-      console.log("AAAAss", a);
+    return ({ frame }) => {
+      // console.log("AAAAss", a);
+
+      mesh.rotation.x = 0.01 * frame;
+      mesh.rotation.y = 0.01 * frame;
+      renderer.render(scene, camera);
     };
   },
   {
     dimensions: [800, 800],
     name: "sketch1",
     context: "webgl",
+    animation: true,
+    totalFrames: 500,
   }
 );

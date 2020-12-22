@@ -25,8 +25,6 @@ function useRefState(
   return [stateRef, setState];
 }
 
-
-
 const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   const [width, height] = settings.dimensions;
 
@@ -66,16 +64,13 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
 
   useEffect(() => {
     if (!canvasProps) return;
-    console.log("CCC", canvasProps);
+
     const { context, width, height } = canvasProps;
     if (!context) return;
-    console.log(context);
     const rFunc = sketch({ context, width, height });
 
-    rFunc({ context, width, height });
+    rFunc({ context, width, height, frame: frame.current });
 
-    console.log("R", rFunc);
-    // setRenderFunc(rFunc);
     renderFunc.current = rFunc;
     function handleUserKeyPress(e: KeyboardEvent) {
       if (e.code === "KeyS" && !e.altKey && e.metaKey) {
@@ -135,9 +130,11 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   }
 
   React.useEffect(() => {
+    // console.log(isPlaying)
     const animate = () => {
       if (isPlaying) {
         // saveThisBlob();
+        // console.log('setting Frame')
         setFrame(
           frame.current < settings.totalFrames
             ? frame.current + 1
@@ -152,9 +149,16 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     } else {
       cancelAnimationFrame(requestRef.current);
     }
+    // animate()
 
     return () => cancelAnimationFrame(requestRef.current);
   }, [isPlaying]);
+
+  // if (frame.current < settings.totalFrames) {
+  //   render();
+  // } else {
+  //   setIsPlaying(false);
+  // }
 
   React.useEffect(() => {
     if (frame.current < settings.totalFrames) {
@@ -162,7 +166,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     } else {
       setIsPlaying(false);
     }
-  }, [frame]);
+  }, [frame.current]);
 
   function render() {
     const { context, width, height } = canvasProps;
