@@ -2,6 +2,11 @@ import ParcelBundler from "parcel-bundler";
 import path from "path";
 import express from "express";
 import { program } from "commander";
+import { bufferToStream } from "./utils/bufferToStream";
+import multer from "multer";
+import mime from "mime-types";
+import dateformat from "dateformat";
+import { router } from "./routes";
 
 program.version("0.0.1");
 
@@ -37,22 +42,39 @@ const options = {
   autoInstall: false,
 } as ParcelBundler.ParcelOptions;
 
-(async function () {
-  const app = express();
-  app.use(express.static("dist"));
-  // Initializes a bundler using the entrypoint location and options provided
-  const bundler = new ParcelBundler(sketchFilePath, options);
+const app = express();
+app.use(express.static("dist"));
+// Initializes a bundler using the entrypoint location and options provided
+const bundler = new ParcelBundler(sketchFilePath, options);
 
-  app.use(bundler.middleware());
+app.get("/", bundler.middleware(), function (req, res) {
+  res.sendFile(path.join(__dirname + "/index.html"));
+});
 
-  app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname + "/index.html"));
-  });
-  // Run the bundler, this returns the main bundle
-  // Use the events if you're using watch mode as this promise will only trigger once and not for every rebuild
-  // const bundle = await bundler.bundle();
-  // bundler.serve();
-  app.listen(1567, () => {
-    console.log(`Example app listening at http://localhost:${1567}`);
-  });
-})();
+app.use("/birds", router);
+
+function getTimeStamp() {
+  const dateFormatStr = `yyyy.mm.dd-HH.MM.ss`;
+  return dateformat(new Date(), dateFormatStr);
+}
+
+const singleFileUpload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, callback) {
+      callback(null, "output");
+    },
+    filename: function (req, file, callback) {
+      const ext = mime.extension(file.mimetype);
+      callback(null, `${file.originalname}.${ext}`);
+    },
+  }),
+}).single("file");
+
+app.post("/saveBlob", singleFileUpload, (req, res) => {
+  console.log("saving file");
+  res.json({ msg: "DONE!" });
+});
+
+app.listen(1567, () => {
+  console.log(`Example app listening at http://localhost:${1567}`);
+});

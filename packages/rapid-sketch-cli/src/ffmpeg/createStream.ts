@@ -1,66 +1,58 @@
 import spawn from "cross-spawn";
-import internal, { Readable } from "stream";
-import { createReadStream, ReadStream } from "fs";
-import { buildMp4Args } from "./buildMp4Args";
 
 const cmd = `/Users/davidreed/Projects/rapid-sketch/node_modules/@ffmpeg-installer/darwin-x64/ffmpeg`;
 
-// /Users/davidreed/tmp/sketches/node_modules/@ffmpeg-installer/darwin-x64/ffmpeg -framerate 30 -f image2pipe -c:v png -i - -vf fps=30 -y -an -preset slow -c:v libx264 -movflags faststart -profile:v high -crf 18 -pix_fmt yuv420p tmp/2020.11.12-14.54.31.mp4
-function bufferToStream(binary) {
-  const readableInstanceStream = new Readable({
-    read() {
-      this.push(binary);
-      this.push(null);
-    },
-  });
+const mp4Args = [
+  "-framerate",
+  "30",
+  "-f",
+  "image2pipe",
+  "-c:v",
+  "png",
+  "-i",
+  "-",
+  "-vf",
+  "fps=30",
+  "-y",
+  "-an",
+  "-preset",
+  "slow",
+  "-c:v",
+  "libx264",
+  "-movflags",
+  "faststart",
+  "-profile:v",
+  "high",
+  "-crf",
+  "18",
+  "-pix_fmt",
+  "yuv420p",
+  "test_movie.mp4",
+];
 
-  return readableInstanceStream;
-}
+const gifArgs = [
+  "-f",
+  "image2pipe",
+  "-i",
+  "-",
+  "-filter_complex",
+  "[0:v] fps=30,scale=600:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse",
+  "test_gif5.gif",
+];
 
-function logCommand(cmd: string, args: string[]) {
-  // if (String(process.env.FFMPEG_DEBUG) === "1") {
-  console.log(cmd, args.join(" "));
-  // }
-}
-
-interface IProps {
-  format?: string;
-  encoding?: string;
-  quiet?: boolean;
-  fps?: number;
-  output?: string;
-}
-
-const initialArgs: IProps = {
-  format: "image/png",
-  encoding: "image/png",
-  quiet: true,
-  fps: 30,
-  output: "~/tmp/movie.mp4",
-};
-
-export function createStream(opts: IProps = initialArgs) {
+export function createStream(opts) {
   let ffmpegStdin;
 
-  opts = {
-    ...initialArgs,
-    ...opts,
-  };
-
-  const { output, quiet } = opts;
-
-  const args = buildMp4Args({ output });
-
   const promise = new Promise<void>((resolve, reject) => {
-    //   logCommand(cmd, args);
-    const ffmpeg = spawn(cmd, args);
+    console.log(cmd, gifArgs.join(" "));
+    const ffmpeg = spawn(cmd, gifArgs);
     const { stdin, stdout, stderr } = ffmpeg;
     ffmpegStdin = stdin;
 
-    if (!quiet) {
-      stdout.pipe(process.stdout);
-      stderr.pipe(process.stderr);
-    }
+    // if (!quiet) {
+    stdout.pipe(process.stdout);
+    stderr.pipe(process.stderr);
+    // }
     stdin.on("error", (err: NodeJS.ErrnoException) => {
       if (err.code !== "EPIPE") {
         return reject(err);
@@ -78,7 +70,7 @@ export function createStream(opts: IProps = initialArgs) {
   return {
     encoding: "image/png",
     stream: ffmpegStdin,
-    writeFrame(readableStream: ReadStream) {
+    writeFrame(readableStream) {
       return new Promise((resolve, reject) => {
         if (ffmpegStdin && ffmpegStdin.writable) {
           readableStream.pipe(ffmpegStdin, { end: false });
@@ -95,3 +87,7 @@ export function createStream(opts: IProps = initialArgs) {
     },
   };
 }
+
+module.exports = {
+  createStream,
+};

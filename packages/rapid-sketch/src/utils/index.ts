@@ -23,7 +23,7 @@ export async function saveBlob(blob: Blob, name: string) {
   const form = new window.FormData();
   form.append("file", blob, name);
   try {
-    const res = await window.fetch("/canvas-sketch-cli/saveBlob", {
+    const res = await window.fetch("/saveBlob", {
       method: "POST",
       cache: "no-cache",
       credentials: "same-origin",

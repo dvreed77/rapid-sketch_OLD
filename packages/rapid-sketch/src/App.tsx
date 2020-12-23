@@ -97,6 +97,18 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
       } else if (e.code === "KeyR") {
         initialize();
         render();
+      } else if (e.code === "KeyP") {
+        for (let i = 0; i <= settings.totalFrames; i++) {
+          setCurrentFrame(i);
+          canvasProps.canvas.toBlob((blob) => {
+            console.log(blob);
+            saveBlob(blob, `frame_${i.toString().padStart(4, "0")}`);
+          });
+        }
+
+        // render();
+
+        console.log("PRESSED P");
       }
     }
 
@@ -106,8 +118,6 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
       window.removeEventListener("keydown", handleUserKeyPress);
     };
   }, [canvasProps]);
-
-  const requestRef = React.useRef(null);
 
   function saveThisBlob() {
     const dataURL = canvasProps.canvas.toDataURL();
@@ -130,43 +140,34 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   }
 
   React.useEffect(() => {
-    // console.log(isPlaying)
+    let raf;
     const animate = () => {
       if (isPlaying) {
-        // saveThisBlob();
-        // console.log('setting Frame')
-        setFrame(
+        setCurrentFrame(
           frame.current < settings.totalFrames
             ? frame.current + 1
             : frame.current
         );
       }
-      requestRef.current = requestAnimationFrame(animate);
+      raf = requestAnimationFrame(animate);
     };
 
     if (isPlaying) {
-      requestRef.current = requestAnimationFrame(animate);
+      raf = requestAnimationFrame(animate);
     } else {
-      cancelAnimationFrame(requestRef.current);
+      cancelAnimationFrame(raf);
     }
-    // animate()
 
-    return () => cancelAnimationFrame(requestRef.current);
+    return () => {
+      cancelAnimationFrame(raf);
+    };
   }, [isPlaying]);
 
-  React.useEffect(() => {
-    if (frame.current < settings.totalFrames) {
-      render();
-    } else {
-      setIsPlaying(false);
-    }
-  }, [frame.current]);
-
-  function render() {
+  async function render() {
     const { context, width, height } = canvasProps;
     const rFunc = renderFunc.current as any;
     if (rFunc !== undefined) {
-      rFunc({ context, width, height, frame: frame.current });
+      await rFunc({ context, width, height, frame: frame.current });
     }
   }
 
@@ -186,6 +187,11 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     await endStream();
   }
 
+  function setCurrentFrame(frame: number) {
+    setFrame(frame);
+    render();
+  }
+
   return (
     <div>
       <div className="pt-5">
@@ -199,7 +205,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
       <CommandBar
         settings={settings}
         frame={frame}
-        setFrame={setFrame}
+        setFrame={setCurrentFrame}
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
         record={record}
