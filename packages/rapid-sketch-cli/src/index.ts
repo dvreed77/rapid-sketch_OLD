@@ -51,7 +51,7 @@ app.get("/", bundler.middleware(), function (req, res) {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-app.use("/birds", router);
+app.use("/record", router);
 
 function getTimeStamp() {
   const dateFormatStr = `yyyy.mm.dd-HH.MM.ss`;

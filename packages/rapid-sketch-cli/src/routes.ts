@@ -12,14 +12,16 @@ router.use(function timeLog(req, res, next) {
 });
 
 let currentStream;
-// define the home page route
-router.get("/startStream", function (req, res) {
+
+router.post("/startStream", function (req, res) {
   currentStream = createStream({
     filename: `output/${"movie"}.${"mp4"}`,
+    type: "mp4",
   });
+  res.json({ msg: "start streaming" });
 });
-// define the about route
-router.get("/endStream", function (req, res) {
+
+router.post("/endStream", function (req, res) {
   let p = Promise.resolve();
   if (currentStream) {
     p = currentStream.end();
@@ -36,20 +38,5 @@ router.post(
     res.json({ msg: "DONE!" });
   }
 );
-
-// app.post("/endStreaming", (req, res) => {
-//   let p = Promise.resolve();
-//   if (currentStream) {
-//     p = currentStream.end();
-//   }
-//   res.json({ msg: "ending streaming" });
-// });
-
-// app.post("/startStreaming", (req, res) => {
-//   currentStream = createStream({
-//     output: `output/${"movie"}-${getTimeStamp()}.${"mp4"}`,
-//   });
-//   res.json({ msg: "started streaming" });
-// });
 
 export { router };

@@ -197,7 +197,8 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     await startStream();
 
     for (let i = 0; i <= settings.totalFrames; i++) {
-      setFrame(i);
+      console.log("ff", i);
+      setCurrentFrame(i);
       await sendCanvas();
     }
 

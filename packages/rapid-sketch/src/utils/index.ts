@@ -73,7 +73,7 @@ export async function saveBlob3(blob: Blob, name: string) {
   const form = new window.FormData();
   form.append("file", blob, name);
   try {
-    const res = await window.fetch("/sendStreamBlob", {
+    const res = await window.fetch("/record/sendStreamBlob", {
       method: "POST",
       cache: "no-cache",
       credentials: "same-origin",
@@ -95,7 +95,8 @@ export async function saveBlob3(blob: Blob, name: string) {
 }
 
 export async function startStream() {
-  const res = await window.fetch("/startStreaming", {
+  console.log("client: startStream");
+  const res = await window.fetch("/record/startStream", {
     method: "POST",
     cache: "no-cache",
     credentials: "same-origin",
@@ -103,7 +104,7 @@ export async function startStream() {
 }
 
 export async function endStream() {
-  const res = await window.fetch("/endStreaming", {
+  const res = await window.fetch("/record/endStream", {
     method: "POST",
     cache: "no-cache",
     credentials: "same-origin",
