@@ -65,28 +65,3 @@ export class random2 {
     return s[0];
   }
 }
-
-// export function randomFBST(f: (x: number) => number, nPts = 1000) {
-//   const dx = 1 / (nPts - 1);
-
-//   const pdfData: [number, number][] = Array.from({
-//     length: nPts,
-//   }).map((_, idx) => [idx * dx, f(idx * dx)]);
-
-//   const cdfData: [number, number][] = pdfData
-//     .slice(1)
-//     .reduce((a, b) => [...a, [b[0], a[a.length - 1][1] + dx * b[1]]], [[0, 0]]);
-
-//   this.pdfData = pdfData;
-//   this.cdfData = cdfData;
-//   const maxD = Math.max(...cdfData.map((d) => d[1]));
-
-//   this.sample = function () {
-//     const x = Math.random() * maxD;
-//     const s = binarySearch(cdfData, x);
-
-//     return s[0];
-//   };
-
-//   return this;
-// }

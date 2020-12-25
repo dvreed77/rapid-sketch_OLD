@@ -4,7 +4,7 @@ import { convertDistance } from "./utils/convertDistance";
 
 export function Canvas({ width, height, setCanvasProps, contextType }) {
   const canvasRef = useRef(null);
-  const [windowWidth, windowHeight] = useWindowSize()
+  const [windowWidth, windowHeight] = useWindowSize();
 
   useEffect(() => {
     const units = "px";
@@ -35,9 +35,11 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
       }
     }
 
+    const pixelRatio = window.devicePixelRatio;
+
     // Calculate Canvas Width
-    let canvasWidth = Math.round(1 * realWidth);
-    let canvasHeight = Math.round(1 * realHeight);
+    let canvasWidth = Math.round(pixelRatio * styleWidth);
+    let canvasHeight = Math.round(pixelRatio * styleHeight);
 
     // Calculate Scale
     const scaleX = canvasWidth / width;
@@ -49,6 +51,9 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
     canvasRef.current.style.width = `${styleWidth}px`;
     canvasRef.current.style.height = `${styleHeight}px`;
 
+    const viewportWidth = Math.round(styleWidth);
+    const viewportHeight = Math.round(styleHeight);
+
     const context = canvasRef.current.getContext(contextType || "2d");
 
     setCanvasProps({
@@ -56,6 +61,8 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
       context,
       width: canvasWidth,
       height: canvasHeight,
+      viewportWidth,
+      viewportHeight,
     });
   }, [windowWidth, windowHeight]);
 

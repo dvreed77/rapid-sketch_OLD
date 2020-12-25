@@ -35,6 +35,8 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     context: null,
     width: null,
     height: null,
+    viewportWidth: null,
+    viewportHeight: null,
   });
 
   const renderFunc = useRef();
@@ -63,11 +65,30 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   }, []);
 
   function initialize() {
-    const { context, width, height } = canvasProps;
+    const {
+      context,
+      width,
+      height,
+      viewportWidth,
+      viewportHeight,
+    } = canvasProps;
     if (!context) return;
 
-    const rFunc = sketch({ context, width, height });
-    rFunc({ context, width, height, frame: frame.current });
+    const rFunc = sketch({
+      context,
+      width,
+      height,
+      viewportWidth,
+      viewportHeight,
+    });
+    rFunc({
+      context,
+      width,
+      height,
+      frame: frame.current,
+      viewportWidth,
+      viewportHeight,
+    });
     renderFunc.current = rFunc;
   }
 

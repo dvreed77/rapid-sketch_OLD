@@ -1,11 +1,13 @@
 // Pulled from https://github.com/mattdesl/convert-length/blob/master/convert-length.js
 
-import { defined } from "./defined";
-var units = ["mm", "cm", "m", "pc", "pt", "in", "ft", "px"];
+type IConversion = {
+  [unit in T_UNITS]: {
+    system: string;
+    factor: number;
+  };
+};
 
-export type units = "mm" | "cm" | "m" | "pc" | "pt" | "in" | "ft" | "px";
-
-const conversions = {
+const conversions: IConversion = {
   // metric
   m: {
     system: "metric",
@@ -20,6 +22,10 @@ const conversions = {
     factor: 1 / 1000,
   },
   // imperial
+  px: {
+    system: "imperial",
+    factor: 1 / 96,
+  },
   pt: {
     system: "imperial",
     factor: 1 / 72,
@@ -56,13 +62,11 @@ function round(value: number, precision: number) {
 
 export function convertDistance(
   value: number,
-  fromUnit: units,
-  toUnit: units,
+  fromUnit: T_UNITS,
+  toUnit: T_UNITS,
   { pixelsPerInch = 96, precision, roundPixel = false }
 ) {
-  if (typeof value !== "number" || !isFinite(value))
-    throw new Error("Value must be a finite number");
-  if (!fromUnit || !toUnit) throw new Error("Must specify from and to units");
+  if (!isFinite(value)) throw new Error("Value must be a finite number");
 
   var precision = precision;
   var roundPixel = roundPixel !== false;

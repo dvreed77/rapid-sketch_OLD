@@ -1,5 +1,20 @@
 import * as d3 from "d3";
-import { Shape } from "./Shape";
+import { Shape } from "../geometry/Shape";
+
+function chaikinCut(pA, pB, ratio) {
+  /*
+   * If ratio is greater than 0.5 flip it so we avoid cutting across
+   * the midpoint of the line.
+   */
+  if (ratio > 0.5) ratio = 1 - ratio;
+
+  /* Find point at a given ratio going from A to B */
+  const pA_new = d3.interpolate(pA, pB)(ratio);
+  const pB_new = d3.interpolate(pB, pA)(ratio);
+
+  return [pA_new, pB_new];
+}
+
 export function chaikin(shape, ratio, iterations = 0) {
   if (iterations > 10) iterations = 10;
   if (iterations === 0) return shape;
@@ -20,18 +35,4 @@ export function chaikin(shape, ratio, iterations = 0) {
 
   const newShape = new Shape(pts);
   return chaikin(newShape, ratio, iterations - 1);
-}
-
-function chaikinCut(pA, pB, ratio) {
-  /*
-   * If ratio is greater than 0.5 flip it so we avoid cutting across
-   * the midpoint of the line.
-   */
-  if (ratio > 0.5) ratio = 1 - ratio;
-
-  /* Find point at a given ratio going from A to B */
-  const pA_new = d3.interpolate(pA, pB)(ratio);
-  const pB_new = d3.interpolate(pB, pA)(ratio);
-
-  return [pA_new, pB_new];
 }

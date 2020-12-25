@@ -17,6 +17,7 @@
     "npm": "^6.14.10",
     "rapid-sketch": "^0.0.3",
     "rapid-sketch-cli": "^0.0.3",
+    "rapid-sketch-utils": "^0.0.3",
     "simplex-noise": "^2.4.0",
     "three": "^0.123.0"
   },

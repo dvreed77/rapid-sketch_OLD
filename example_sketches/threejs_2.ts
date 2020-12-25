@@ -1,4 +1,5 @@
 import { canvasSketch } from "rapid-sketch";
+import { random } from "rapid-sketch-utils";
 import * as THREE from "three";
 import * as d3 from "d3";
 import palettes from "nice-color-palettes";
@@ -6,22 +7,9 @@ import SimplexNoise from "simplex-noise";
 
 const simplex = new SimplexNoise();
 // console.log(randomNoise);
-function randomChance(threshold) {
-  return Math.random() > threshold;
-}
-function randomPick(array: any[]) {
-  return array[randomInt(0, array.length - 1)];
-}
 
-function randomInt(min: number, max: number) {
-  return Math.floor(random(min, max + 1));
-}
+const randomGaussian = random.randomGaussian();
 
-function random(min = 0, max = 1) {
-  return Math.random() * (max - min) + min;
-}
-
-const randomGaussian = d3.randomNormal();
 canvasSketch(
   ({ context, width, height }) => {
     console.log("init");
@@ -29,7 +17,7 @@ canvasSketch(
       context,
     });
 
-    const palette = randomPick(palettes);
+    const palette = random.randomPick(palettes);
 
     // WebGL background color
     renderer.setClearColor("hsl(0, 0%, 95%)", 1);
@@ -65,15 +53,15 @@ canvasSketch(
       mesh.originalPosition = mesh.position.clone();
 
       // Choose a color for the mesh material
-      mesh.material.color.set(randomPick(palette));
+      mesh.material.color.set(random.randomPick(palette));
 
       // Randomly scale each axis
       mesh.scale.set(randomGaussian(), randomGaussian(), randomGaussian());
 
       // Do more random scaling on each axis
-      if (randomChance(0.5)) mesh.scale.x *= randomGaussian();
-      if (randomChance(0.5)) mesh.scale.y *= randomGaussian();
-      if (randomChance(0.5)) mesh.scale.z *= randomGaussian();
+      if (random.randomChance(0.5)) mesh.scale.x *= randomGaussian();
+      if (random.randomChance(0.5)) mesh.scale.y *= randomGaussian();
+      if (random.randomChance(0.5)) mesh.scale.z *= randomGaussian();
 
       // Further scale each object
       mesh.scale.multiplyScalar(randomGaussian() * 0.25);

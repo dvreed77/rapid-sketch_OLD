@@ -13,8 +13,8 @@ export function map(
     return newval;
   }
   if (start2 < stop2) {
-    return this.constrain(newval, start2, stop2);
+    return constrain(newval, start2, stop2);
   } else {
-    return this.constrain(newval, stop2, start2);
+    return constrain(newval, stop2, start2);
   }
 }

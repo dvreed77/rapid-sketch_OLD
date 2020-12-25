@@ -1,8 +1,4 @@
-export function shuffle(arr: any[]) {
-  if (!Array.isArray(arr)) {
-    throw new TypeError("Expected Array, got " + typeof arr);
-  }
-
+export function randomShuffle(arr: any[]) {
   var rand;
   var tmp;
   var len = arr.length;

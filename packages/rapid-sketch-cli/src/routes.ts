@@ -1,5 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
+import { createStream } from "./ffmpeg/createStream";
 import { bufferToStream } from "./utils/bufferToStream";
 
 const router = Router();
@@ -14,7 +15,7 @@ let currentStream;
 // define the home page route
 router.get("/startStream", function (req, res) {
   currentStream = createStream({
-    output: `output/${"movie"}-${getTimeStamp()}.${"mp4"}`,
+    filename: `output/${"movie"}.${"mp4"}`,
   });
 });
 // define the about route

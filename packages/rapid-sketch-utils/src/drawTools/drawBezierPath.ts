@@ -1,4 +1,4 @@
-export function drawBezierPath(context, bezierShape) {
+export function drawBezierPath(context: CanvasRenderingContext2D, bezierShape) {
   context.beginPath();
   context.moveTo(bezierShape[0].pt[0], bezierShape[0].pt[1]);
 

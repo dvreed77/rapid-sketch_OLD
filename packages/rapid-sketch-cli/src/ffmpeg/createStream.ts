@@ -40,7 +40,11 @@ const gifArgs = [
   "test_gif5.gif",
 ];
 
-export function createStream(opts) {
+interface IProps {
+  filename: string;
+}
+
+export function createStream({ filename }: IProps) {
   let ffmpegStdin;
 
   const promise = new Promise<void>((resolve, reject) => {
