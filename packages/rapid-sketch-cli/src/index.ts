@@ -70,6 +70,8 @@ const singleFileUpload = multer({
   }),
 }).single("file");
 
+app.use("/assets", express.static("./assets"));
+
 app.post("/saveBlob", singleFileUpload, (req, res) => {
   console.log("saving file");
   res.json({ msg: "DONE!" });

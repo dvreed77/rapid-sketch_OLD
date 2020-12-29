@@ -14,7 +14,7 @@ canvasSketch(
     renderer.setClearColor("white");
 
     const camera = new THREE.PerspectiveCamera(50, 1, 0.01, 100);
-    camera.position.set(0, 0, -4);
+    camera.position.set(2, 2, -4);
     camera.lookAt(new THREE.Vector3());
 
     const controls = new OrbitControls(camera, context.canvas);
@@ -22,10 +22,15 @@ canvasSketch(
     const scene = new THREE.Scene();
 
     const geometry = new THREE.SphereGeometry(1, 32, 16);
+    const texture = new THREE.TextureLoader().load("assets/earth.jpg");
+
+    // const material = new THREE.MeshBasicMaterial({
+    //   color: "red",
+    //   wireframe: true,
+    // });
 
     const material = new THREE.MeshBasicMaterial({
-      color: "red",
-      wireframe: true,
+      map: texture,
     });
 
     const mesh = new THREE.Mesh(geometry, material);

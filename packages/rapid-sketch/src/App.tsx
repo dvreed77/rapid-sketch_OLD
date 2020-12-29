@@ -102,10 +102,16 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     function handleUserKeyPress(e: KeyboardEvent) {
       if (e.code === "KeyS" && !e.altKey && e.metaKey) {
         e.preventDefault();
-        const dataURL = canvasProps.canvas.toDataURL();
-        createBlobFromDataURL(dataURL).then((blob: any) => {
+        render();
+        canvasProps.canvas.toBlob((blob) => {
+          console.log(blob);
           saveBlob(blob, settings.name);
         });
+
+        // const dataURL = canvasProps.canvas.toDataURL();
+        // createBlobFromDataURL(dataURL).then((blob: any) => {
+        //   saveBlob(blob, settings.name);
+        // });
       } else if (e.code === "KeyP" && !e.altKey && e.metaKey) {
         e.preventDefault();
 
