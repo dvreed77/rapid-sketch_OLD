@@ -63,6 +63,7 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
       height: canvasHeight,
       viewportWidth,
       viewportHeight,
+      pixelRatio,
     });
   }, [windowWidth, windowHeight]);
 

@@ -37,6 +37,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     height: null,
     viewportWidth: null,
     viewportHeight: null,
+    pixelRatio: null,
   });
 
   const renderFunc = useRef();
@@ -71,6 +72,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
       height,
       viewportWidth,
       viewportHeight,
+      pixelRatio,
     } = canvasProps;
     if (!context) return;
 
@@ -80,6 +82,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
       height,
       viewportWidth,
       viewportHeight,
+      pixelRatio,
     });
     rFunc({
       context,
