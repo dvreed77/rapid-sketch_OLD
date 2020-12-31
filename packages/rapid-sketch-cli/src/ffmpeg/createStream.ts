@@ -1,7 +1,9 @@
 import spawn from "cross-spawn";
 import { Readable, Writable } from "stream";
 
-const cmd = `/Users/dreed/tmp/rapid-sketch/packages/rapid-sketch-cli/node_modules/@ffmpeg-installer/darwin-x64/ffmpeg`;
+// const cmd = `/Users/dreed/tmp/rapid-sketch/packages/rapid-sketch-cli/node_modules/@ffmpeg-installer/darwin-x64/ffmpeg`;
+
+const cmd = `/Users/davidreed/Projects/rapid-sketch/node_modules/@ffmpeg-installer/darwin-x64/ffmpeg`;
 
 function getFFMPEGArgs({ filename, type }) {
   const fps = 30;

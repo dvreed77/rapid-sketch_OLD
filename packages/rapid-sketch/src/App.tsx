@@ -128,20 +128,19 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
         initialize();
         render();
       } else if (e.code === "KeyP") {
-        for (let i = 0; i <= settings.totalFrames; i++) {
-          setCurrentFrame(i);
-          canvasProps.canvas.toBlob((blob) => {
-            console.log(blob);
-            saveBlob(blob, `frame_${i.toString().padStart(4, "0")}`);
-          });
-        }
+        // for (let i = 0; i <= settings.totalFrames; i++) {
+        //   setCurrentFrame(i);
+        //   canvasProps.canvas.toBlob((blob) => {
+        //     console.log(blob);
+        //     saveBlob(blob, `frame_${i.toString().padStart(4, "0")}`);
+        //   });
+        // }
 
-        // render();
+        render();
 
         console.log("PRESSED P");
       }
     }
-
     window.addEventListener("keydown", handleUserKeyPress);
 
     return () => {
