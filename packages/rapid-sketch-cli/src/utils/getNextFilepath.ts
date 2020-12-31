@@ -4,7 +4,8 @@ import path from "path";
 export function getNextFilepath(
   basename: string,
   ext: string,
-  directory: string
+  directory: string,
+  returnFullpath = false
 ) {
   const existingFiles = glob.sync(path.join(directory, `${basename}*.${ext}`));
 
@@ -25,5 +26,9 @@ export function getNextFilepath(
     .toString()
     .padStart(3, "0")}.${ext}`;
 
-  return path.join(directory, outputFilename);
+  if (returnFullpath) {
+    return path.join(directory, outputFilename);
+  } else {
+    return outputFilename;
+  }
 }

@@ -1,15 +1,7 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
-import {
-  createBlobFromDataURL,
-  endStream,
-  saveBlob,
-  saveBlob2,
-  saveBlob3,
-  startStream,
-} from "./utils";
-import mime from "mime";
+import { endStream, saveBlob, sendStreamBlob, startStream } from "./utils";
 
 function useRefState(
   initialState: any
@@ -104,7 +96,6 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
         e.preventDefault();
         render();
         canvasProps.canvas.toBlob((blob) => {
-          console.log(blob);
           saveBlob(blob, settings.name);
         });
       } else if (e.code === "KeyR") {
@@ -121,16 +112,6 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
       window.removeEventListener("keydown", handleUserKeyPress);
     };
   }, [canvasProps]);
-
-  async function sendCanvas() {
-    const dataURL = canvasProps.canvas.toDataURL();
-    const blob = await createBlobFromDataURL(dataURL);
-
-    const fname = `${settings.name}_${frame.current
-      .toString()
-      .padStart(3, "0")}`;
-    return saveBlob3(blob, fname);
-  }
 
   React.useEffect(() => {
     let raf;
@@ -169,7 +150,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
 
     for (let i = 0; i <= settings.totalFrames; i++) {
       setCurrentFrame(i);
-      await sendCanvas();
+      await sendStreamBlob(canvasProps.canvas);
     }
 
     await endStream();

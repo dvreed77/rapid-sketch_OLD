@@ -19,11 +19,21 @@ export function createBlobFromDataURL(dataURL): Promise<Blob> {
   });
 }
 
+export function promisfyCanvasToBlob(canvas): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    try {
+      canvas.toBlob(resolve);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
 export async function saveBlob(blob: Blob, name: string) {
   const form = new window.FormData();
   form.append("file", blob, name);
   try {
-    const res = await window.fetch("/saveBlob", {
+    const res = await window.fetch("/record/saveBlob", {
       method: "POST",
       cache: "no-cache",
       credentials: "same-origin",
@@ -44,34 +54,11 @@ export async function saveBlob(blob: Blob, name: string) {
   }
 }
 
-export async function saveBlob2(blob: Blob, name: string) {
-  const form = new window.FormData();
-  form.append("file", blob, name);
-  try {
-    const res = await window.fetch("/saveStream", {
-      method: "POST",
-      cache: "no-cache",
-      credentials: "same-origin",
-      body: form,
-    });
-    if (res.status === 200) {
-      return res.json();
-    } else {
-      return res.text().then((text) => {
-        throw new Error(text);
-      });
-    }
-  } catch (err) {
-    // Some issue, just bail out and return nil hash
-    // console.warn(`There was a problem exporting ${opts.filename}`);
-    console.error(err);
-    return undefined;
-  }
-}
+export async function sendStreamBlob(canvas: HTMLCanvasElement) {
+  const blob = await promisfyCanvasToBlob(canvas);
 
-export async function saveBlob3(blob: Blob, name: string) {
   const form = new window.FormData();
-  form.append("file", blob, name);
+  form.append("file", blob, "frame.png");
   try {
     const res = await window.fetch("/record/sendStreamBlob", {
       method: "POST",
@@ -87,8 +74,6 @@ export async function saveBlob3(blob: Blob, name: string) {
       });
     }
   } catch (err) {
-    // Some issue, just bail out and return nil hash
-    // console.warn(`There was a problem exporting ${opts.filename}`);
     console.error(err);
     return undefined;
   }
