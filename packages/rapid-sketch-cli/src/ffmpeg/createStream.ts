@@ -30,7 +30,7 @@ function getFFMPEGArgs({ filename, type }) {
     "18",
     "-pix_fmt",
     "yuv420p",
-    `${filename}.mp4`,
+    `${filename}`,
   ];
 
   const gifArgs = [
@@ -40,7 +40,7 @@ function getFFMPEGArgs({ filename, type }) {
     "-",
     "-filter_complex",
     `[0:v] fps=${fps},scale=${outputWidth}:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse`,
-    `${filename}.gif`,
+    `${filename}`,
   ];
 
   return type === "mp4" ? mp4Args : gifArgs;

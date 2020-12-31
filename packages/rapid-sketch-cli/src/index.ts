@@ -2,7 +2,6 @@ import ParcelBundler from "parcel-bundler";
 import path from "path";
 import express from "express";
 import { program } from "commander";
-import { bufferToStream } from "./utils/bufferToStream";
 import multer from "multer";
 import mime from "mime-types";
 import dateformat from "dateformat";
@@ -17,6 +16,8 @@ program
 
 program.parse(process.argv);
 const sketchFilePath = program.args[0];
+
+console.log(sketchFilePath);
 
 // Bundler options
 const options = {
@@ -43,6 +44,7 @@ const options = {
 } as ParcelBundler.ParcelOptions;
 
 const app = express();
+
 app.use(express.static("dist"));
 // Initializes a bundler using the entrypoint location and options provided
 const bundler = new ParcelBundler(sketchFilePath, options);
@@ -51,7 +53,7 @@ app.get("/", bundler.middleware(), function (req, res) {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-app.use("/record", router);
+app.use("/record", router({ sketchFilePath }));
 
 function getTimeStamp() {
   const dateFormatStr = `yyyy.mm.dd-HH.MM.ss`;

@@ -122,16 +122,6 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     };
   }, [canvasProps]);
 
-  function saveThisBlob() {
-    const dataURL = canvasProps.canvas.toDataURL();
-    createBlobFromDataURL(dataURL).then((blob: any) => {
-      const fname = `${settings.name}_${frame.current
-        .toString()
-        .padStart(3, "0")}`;
-      saveBlob2(blob, fname);
-    });
-  }
-
   async function sendCanvas() {
     const dataURL = canvasProps.canvas.toDataURL();
     const blob = await createBlobFromDataURL(dataURL);
@@ -175,18 +165,13 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   }
 
   async function record() {
-    console.log("startStreaming");
-    await startStream();
+    await startStream({ type: "mp4" });
 
     for (let i = 0; i <= settings.totalFrames; i++) {
       setCurrentFrame(i);
       await sendCanvas();
     }
 
-    await endStream();
-  }
-
-  async function _endStreaming() {
     await endStream();
   }
 

@@ -94,12 +94,15 @@ export async function saveBlob3(blob: Blob, name: string) {
   }
 }
 
-export async function startStream() {
-  console.log("client: startStream");
+export async function startStream(data: any) {
   const res = await window.fetch("/record/startStream", {
     method: "POST",
     cache: "no-cache",
     credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
 }
 

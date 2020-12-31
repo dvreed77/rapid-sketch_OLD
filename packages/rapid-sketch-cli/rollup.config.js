@@ -4,17 +4,18 @@ import copy from "rollup-plugin-copy";
 import commonjs from "@rollup/plugin-commonjs";
 import pkg from "./package.json";
 import json from "@rollup/plugin-json";
-// import babel from "rollup-plugin-babel";
 
 export default {
   external: [
     "parcel-bundler",
     "express",
+    "body-parser",
     "multer",
     "commander",
     "mime-types",
     "resolve-global",
     "resolve",
+    "glob",
   ],
   input: "src/index.ts",
   output: [
@@ -25,9 +26,6 @@ export default {
     },
   ],
   plugins: [
-    // babel({
-    //   exclude: "node_modules/**",
-    // }),
     typescript(),
     nodeResolve({
       preferBuiltins: true,
