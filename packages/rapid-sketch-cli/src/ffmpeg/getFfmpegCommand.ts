@@ -6,7 +6,8 @@ interface IProps {
   moduleName: string;
   cwd: string;
 }
-async function getCommand(
+
+export async function getFfmpegCommand(
   { moduleName, cwd }: IProps = {
     moduleName: "@ffmpeg-installer/ffmpeg",
     cwd: process.cwd(),
@@ -15,8 +16,6 @@ async function getCommand(
   if (process.env.FFMPEG_PATH) {
     return process.env.FFMPEG_PATH;
   }
-
-  console.log(moduleName, cwd);
 
   // first resolve local version
   let modulePath: string;
@@ -55,5 +54,3 @@ async function hasCommand(cmd) {
   } catch (_) {}
   return exists;
 }
-
-console.log(getCommand());

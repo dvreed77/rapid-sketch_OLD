@@ -1,20 +1,14 @@
 import { Router } from "express";
 import multer from "multer";
-import { createStream } from "./ffmpeg/createStream";
+import { createStream, IFfmpegStream } from "./ffmpeg/createStream";
 import { bufferToStream } from "./utils/bufferToStream";
 
 const router = Router();
 
-// middleware that is specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log("Time: ", Date.now());
-  next();
-});
+let currentStream: IFfmpegStream;
 
-let currentStream;
-
-router.post("/startStream", function (req, res) {
-  currentStream = createStream({
+router.post("/startStream", async function (req, res) {
+  currentStream = await createStream({
     filename: `output/${"movie"}.${"mp4"}`,
     type: "mp4",
   });

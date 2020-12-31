@@ -1,9 +1,6 @@
 import spawn from "cross-spawn";
 import { Readable, Writable } from "stream";
-
-// const cmd = `/Users/dreed/tmp/rapid-sketch/packages/rapid-sketch-cli/node_modules/@ffmpeg-installer/darwin-x64/ffmpeg`;
-
-const cmd = `/Users/davidreed/Projects/rapid-sketch/node_modules/@ffmpeg-installer/darwin-x64/ffmpeg`;
+import { getFfmpegCommand } from "./getFfmpegCommand";
 
 function getFFMPEGArgs({ filename, type }) {
   const fps = 30;
@@ -52,21 +49,35 @@ function getFFMPEGArgs({ filename, type }) {
 interface IProps {
   filename: string;
   type: string;
+  quiet?: boolean;
 }
 
-export function createStream({ filename, type }: IProps) {
+export interface IFfmpegStream {
+  encoding: string;
+  stream: Writable;
+  writeFrame(readableStream: Readable): Promise<unknown>;
+  end(): Promise<void>;
+}
+
+export async function createStream({
+  filename,
+  type,
+  quiet = true,
+}: IProps): Promise<IFfmpegStream> {
   let ffmpegStdin: Writable;
+
+  const ffmpegCommand = await getFfmpegCommand();
 
   const args = getFFMPEGArgs({ filename, type });
   const promise = new Promise<void>((resolve, reject) => {
-    const ffmpeg = spawn(cmd, args);
+    const ffmpeg = spawn(ffmpegCommand, args);
     const { stdin, stdout, stderr } = ffmpeg;
     ffmpegStdin = stdin;
 
-    // if (!quiet) {
-    stdout.pipe(process.stdout);
-    stderr.pipe(process.stderr);
-    // }
+    if (!quiet) {
+      stdout.pipe(process.stdout);
+      stderr.pipe(process.stderr);
+    }
     stdin.on("error", (err: NodeJS.ErrnoException) => {
       if (err.code !== "EPIPE") {
         return reject(err);

@@ -7,7 +7,15 @@ import json from "@rollup/plugin-json";
 // import babel from "rollup-plugin-babel";
 
 export default {
-  external: ["parcel-bundler", "express", "multer", "commander", "mime-types"],
+  external: [
+    "parcel-bundler",
+    "express",
+    "multer",
+    "commander",
+    "mime-types",
+    "resolve-global",
+    "resolve",
+  ],
   input: "src/index.ts",
   output: [
     {

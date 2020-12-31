@@ -107,37 +107,11 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
           console.log(blob);
           saveBlob(blob, settings.name);
         });
-
-        // const dataURL = canvasProps.canvas.toDataURL();
-        // createBlobFromDataURL(dataURL).then((blob: any) => {
-        //   saveBlob(blob, settings.name);
-        // });
-      } else if (e.code === "KeyP" && !e.altKey && e.metaKey) {
-        e.preventDefault();
-
-        // TODO: better name than r
-        // const r = renderFunc({ context, width, height });
-
-        // r.forEach(({ data, extension }) => {
-        //   const blob = new Blob([data], {
-        //     type: mime.getType(extension) as string,
-        //   });
-        //   saveBlob(blob, settings.name);
-        // });
       } else if (e.code === "KeyR") {
         initialize();
         render();
       } else if (e.code === "KeyP") {
-        // for (let i = 0; i <= settings.totalFrames; i++) {
-        //   setCurrentFrame(i);
-        //   canvasProps.canvas.toBlob((blob) => {
-        //     console.log(blob);
-        //     saveBlob(blob, `frame_${i.toString().padStart(4, "0")}`);
-        //   });
-        // }
-
         render();
-
         console.log("PRESSED P");
       }
     }
@@ -205,7 +179,6 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     await startStream();
 
     for (let i = 0; i <= settings.totalFrames; i++) {
-      console.log("ff", i);
       setCurrentFrame(i);
       await sendCanvas();
     }

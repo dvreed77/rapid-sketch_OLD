@@ -77,7 +77,7 @@ canvasSketch(
     };
   },
   {
-    dimensions: [800, 800],
+    dimensions: [1080, 1080],
     name: "sketch1",
     context: "webgl",
     animation: true,
