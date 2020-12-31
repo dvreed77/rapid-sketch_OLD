@@ -45,14 +45,14 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
     const scaleX = canvasWidth / width;
     const scaleY = canvasHeight / height;
 
-    canvasRef.current.width = canvasWidth;
-    canvasRef.current.height = canvasHeight;
+    canvasRef.current.width = realWidth;
+    canvasRef.current.height = realHeight;
 
     canvasRef.current.style.width = `${styleWidth}px`;
     canvasRef.current.style.height = `${styleHeight}px`;
 
-    const viewportWidth = Math.round(styleWidth);
-    const viewportHeight = Math.round(styleHeight);
+    const viewportWidth = Math.round(realWidth);
+    const viewportHeight = Math.round(realHeight);
 
     const context = canvasRef.current.getContext(contextType || "2d");
 
