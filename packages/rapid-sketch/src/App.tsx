@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
 import { endStream, saveBlob, sendStreamBlob, startStream } from "./utils";
+import { ISettings } from "./index";
 
 function useRefState(
   initialState: any
@@ -169,6 +170,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
           height={height}
           setCanvasProps={setCanvasProps}
           contextType={settings.context}
+          settings={settings}
         />
       </div>
       <CommandBar

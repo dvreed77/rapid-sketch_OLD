@@ -1,8 +1,23 @@
 import React, { useEffect, useRef } from "react";
+import { ISettings } from "./index";
 import { useWindowSize } from "./hooks/useWindowResize";
 import { convertDistance } from "./utils/convertDistance";
 
-export function Canvas({ width, height, setCanvasProps, contextType }) {
+interface IProps {
+  width: number;
+  height: number;
+  setCanvasProps: any;
+  contextType: any;
+  settings: ISettings;
+}
+
+export function Canvas({
+  width,
+  height,
+  setCanvasProps,
+  contextType,
+  settings,
+}: IProps) {
   const canvasRef = useRef(null);
   const [windowWidth, windowHeight] = useWindowSize();
 
@@ -25,15 +40,15 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
     const scaleToFitPadding = 40;
     const maxWidth = Math.round(windowWidth - scaleToFitPadding * 2);
     const maxHeight = Math.round(windowHeight - scaleToFitPadding * 2);
-    if (styleWidth > maxWidth || styleHeight > maxHeight) {
-      if (windowAspect > aspect) {
-        styleHeight = maxHeight;
-        styleWidth = Math.round(styleHeight * aspect);
-      } else {
-        styleWidth = maxWidth;
-        styleHeight = Math.round(styleWidth / aspect);
-      }
+    // if (styleWidth > maxWidth || styleHeight > maxHeight) {
+    if (windowAspect > aspect) {
+      styleHeight = maxHeight;
+      styleWidth = Math.round(styleHeight * aspect);
+    } else {
+      styleWidth = maxWidth;
+      styleHeight = Math.round(styleWidth / aspect);
     }
+    // }
 
     const pixelRatio = window.devicePixelRatio;
 
@@ -45,22 +60,33 @@ export function Canvas({ width, height, setCanvasProps, contextType }) {
     const scaleX = canvasWidth / width;
     const scaleY = canvasHeight / height;
 
-    canvasRef.current.width = realWidth;
-    canvasRef.current.height = realHeight;
+    const canvas = canvasRef.current;
 
-    canvasRef.current.style.width = `${styleWidth}px`;
-    canvasRef.current.style.height = `${styleHeight}px`;
+    canvas.width = realWidth;
+    canvas.height = realHeight;
+
+    canvas.style.width = `${styleWidth}px`;
+    canvas.style.height = `${styleHeight}px`;
 
     const viewportWidth = Math.round(realWidth);
     const viewportHeight = Math.round(realHeight);
 
-    const context = canvasRef.current.getContext(contextType || "2d");
+    const context = canvas.getContext(contextType || "2d");
+
+    if (settings.pixelated) {
+      context.imageSmoothingEnabled = false;
+      context.mozImageSmoothingEnabled = false;
+      context.oImageSmoothingEnabled = false;
+      context.webkitImageSmoothingEnabled = false;
+      context.msImageSmoothingEnabled = false;
+      canvas.style["image-rendering"] = "pixelated";
+    }
 
     setCanvasProps({
       canvas: canvasRef.current,
       context,
-      width: canvasWidth,
-      height: canvasHeight,
+      width: viewportWidth,
+      height: viewportHeight,
       viewportWidth,
       viewportHeight,
       pixelRatio,
