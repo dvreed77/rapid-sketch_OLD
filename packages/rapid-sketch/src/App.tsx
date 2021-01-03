@@ -2,25 +2,12 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
 import { endStream, saveBlob, sendStreamBlob, startStream } from "./utils";
-import { IRapidSketchSettings, ISettings } from "./index";
-
-function useRefState(
-  initialState: any
-): [React.MutableRefObject<any>, (state: any) => void] {
-  const [state, _setState] = React.useState(initialState);
-
-  const stateRef = React.useRef(state);
-  const setState = (state: any) => {
-    stateRef.current = state;
-    _setState(state);
-  };
-
-  return [stateRef, setState];
-}
+import { ISettings } from "./index";
+import { useRefState } from "./utils/useRefState";
 
 interface IProps {
   sketch: any;
-  settings: IRapidSketchSettings;
+  settings: Required<ISettings>;
 }
 
 interface ICanvasProps {
@@ -37,15 +24,6 @@ const App = ({ sketch, settings }: IProps) => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [frame, setFrame] = useRefState(0);
-  // const [canvasProps, setCanvasProps] = useState({
-  //   canvas: null,
-  //   context: null,
-  //   width: null,
-  //   height: null,
-  //   viewportWidth: null,
-  //   viewportHeight: null,
-  //   pixelRatio: null,
-  // });
 
   const [canvasProps, setCanvasProps] = useState<ICanvasProps>();
 
@@ -64,10 +42,6 @@ const App = ({ sketch, settings }: IProps) => {
     }
 
     window.addEventListener("keydown", handleUserKeyPress);
-
-    if (canvasProps?.context) {
-      render();
-    }
 
     return () => {
       window.removeEventListener("keydown", handleUserKeyPress);
@@ -104,6 +78,8 @@ const App = ({ sketch, settings }: IProps) => {
       viewportHeight,
     });
     renderFunc.current = rFunc;
+
+    if (settings.animation && settings.autoPlay) setIsPlaying(true);
   }
 
   useEffect(() => {
@@ -138,14 +114,19 @@ const App = ({ sketch, settings }: IProps) => {
   React.useEffect(() => {
     let raf = NaN;
     const animate = () => {
-      if (isPlaying) {
-        setCurrentFrame(
-          frame.current < settings.totalFrames
-            ? frame.current + 1
-            : frame.current
-        );
+      const nextFrame = frame.current + 1;
+
+      if (nextFrame <= settings.totalFrames) {
+        setCurrentFrame(nextFrame);
+        raf = requestAnimationFrame(animate);
+      } else {
+        if (settings.autoRepeat) {
+          setCurrentFrame(0);
+          raf = requestAnimationFrame(animate);
+        } else {
+          setIsPlaying(false);
+        }
       }
-      raf = requestAnimationFrame(animate);
     };
 
     if (isPlaying) {
@@ -183,8 +164,6 @@ const App = ({ sketch, settings }: IProps) => {
     setFrame(frame);
     render();
   }
-
-  console.log("render");
 
   return (
     <div>

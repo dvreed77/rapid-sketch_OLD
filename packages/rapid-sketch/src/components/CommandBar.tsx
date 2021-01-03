@@ -9,10 +9,10 @@ import {
   faFastForward,
   faFileVideo,
 } from "@fortawesome/free-solid-svg-icons";
-import { IRapidSketchSettings } from "..";
+import { ISettings } from "..";
 
 interface IProps {
-  settings: IRapidSketchSettings;
+  settings: Required<ISettings>;
   frame: React.MutableRefObject<any>;
   setFrame: (state: any) => void;
   isPlaying: boolean;

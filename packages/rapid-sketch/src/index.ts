@@ -34,20 +34,12 @@ export interface ISettings {
   totalFrames?: number;
   context?: string;
   pixelated?: boolean;
+  autoRepeat?: boolean;
+  autoPlay?: boolean;
+  duration?: number;
 }
 
-export interface IRapidSketchSettings {
-  dimensions: [number, number];
-  units: T_UNITS;
-  pixelsPerInch: number;
-  name: string;
-  animation: boolean;
-  totalFrames: number;
-  context: string;
-  pixelated: boolean;
-}
-
-const defaultSettings: IRapidSketchSettings = {
+const defaultSettings: Required<ISettings> = {
   dimensions: [window.innerWidth, window.innerHeight],
   units: "px",
   pixelsPerInch: 72,
@@ -56,6 +48,9 @@ const defaultSettings: IRapidSketchSettings = {
   totalFrames: 500,
   context: "2d",
   pixelated: false,
+  autoRepeat: true,
+  autoPlay: true,
+  duration: NaN,
 };
 
 export function canvasSketch(
@@ -63,7 +58,7 @@ export function canvasSketch(
   settings: ISettings
 ) {
   function renderApp() {
-    const rapidSketchSettings = {
+    const rapidSketchSettings: Required<ISettings> = {
       ...defaultSettings,
       ...settings,
     };

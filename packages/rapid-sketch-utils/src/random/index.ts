@@ -1,5 +1,5 @@
 // import seedRandom from "seed-random";
-// import SimplexNoise from "simplex-noise";
+import SimplexNoise from "simplex-noise";
 
 export { randomNormal as randomGaussian } from "d3";
 export * from "./randomF";
@@ -9,3 +9,4 @@ export * from "./randomFloat";
 export * from "./randomInt";
 export * from "./randomPick";
 export * from "./weightedSet";
+export { SimplexNoise };

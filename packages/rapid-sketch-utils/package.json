@@ -39,6 +39,7 @@
     "jsts": "^2.6.1",
     "mathjs": "^8.1.0",
     "seed-random": "^2.2.0",
+    "simplex-noise": "^2.4.0",
     "transformation-matrix": "^2.5.0"
   }
 }
