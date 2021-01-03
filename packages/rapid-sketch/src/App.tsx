@@ -2,11 +2,11 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
 import { endStream, saveBlob, sendStreamBlob, startStream } from "./utils";
-import { ISettings } from "./index";
+import { ISettings, ISketch } from "./index";
 import { useRefState } from "./utils/useRefState";
 
 interface IProps {
-  sketch: any;
+  sketch: (arg0: ISketch) => (arg0: ISketch) => any;
   settings: Required<ISettings>;
 }
 
@@ -24,10 +24,11 @@ const App = ({ sketch, settings }: IProps) => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [frame, setFrame] = useRefState(0);
+  const [time, setTime] = useRefState(0);
 
   const [canvasProps, setCanvasProps] = useState<ICanvasProps>();
 
-  const renderFunc = useRef();
+  const renderFunc = useRef<(arg0: ISketch) => any>();
   document.title = `${settings.name} | RapidSketch`;
 
   useEffect(() => {
@@ -68,6 +69,9 @@ const App = ({ sketch, settings }: IProps) => {
       viewportWidth,
       viewportHeight,
       pixelRatio,
+      units: "px",
+      time: 0,
+      frame: 0,
     });
     rFunc({
       context,
@@ -76,8 +80,14 @@ const App = ({ sketch, settings }: IProps) => {
       frame: frame.current,
       viewportWidth,
       viewportHeight,
+      pixelRatio,
+      units: "px",
+      time: 0,
     });
     renderFunc.current = rFunc;
+
+    // console.log(performance.now());
+    setTime(performance.now());
 
     if (settings.animation && settings.autoPlay) setIsPlaying(true);
   }
@@ -142,10 +152,26 @@ const App = ({ sketch, settings }: IProps) => {
 
   async function render() {
     if (!canvasProps) return;
-    const { context, width, height } = canvasProps;
-    const rFunc = renderFunc.current as any;
+    const {
+      context,
+      width,
+      height,
+      viewportWidth,
+      viewportHeight,
+    } = canvasProps;
+    const rFunc = renderFunc.current;
     if (rFunc !== undefined) {
-      await rFunc({ context, width, height, frame: frame.current });
+      await rFunc({
+        context,
+        width,
+        height,
+        frame: frame.current,
+        pixelRatio: 1,
+        units: "px",
+        time: (performance.now() - time.current) / 1000,
+        viewportWidth,
+        viewportHeight,
+      });
     }
   }
 

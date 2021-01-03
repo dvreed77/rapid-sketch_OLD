@@ -20,9 +20,12 @@ export interface ISketch {
   context: CanvasRenderingContext2D;
   width: number;
   height: number;
+  viewportWidth: number;
+  viewportHeight: number;
   units: T_UNITS;
-  deltaTime: number;
+  time: number;
   frame: number;
+  pixelRatio: number;
 }
 
 export interface ISettings {
