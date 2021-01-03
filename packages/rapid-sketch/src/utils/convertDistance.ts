@@ -1,10 +1,21 @@
 // Pulled from https://github.com/mattdesl/convert-length/blob/master/convert-length.js
 
 import { T_UNITS } from "../index";
-import { defined } from "./defined";
-var units = ["mm", "cm", "m", "pc", "pt", "in", "ft", "px"];
 
-const conversions = {
+enum System {
+  metric = "metric",
+  imperial = "imperial",
+}
+
+export type T_SYSTEM = keyof typeof System;
+
+type ConverstionType = {
+  [key in T_UNITS]: {
+    system: T_SYSTEM;
+    factor: number;
+  };
+};
+const conversions: ConverstionType = {
   // metric
   m: {
     system: "metric",
@@ -23,6 +34,10 @@ const conversions = {
     system: "imperial",
     factor: 1 / 72,
   },
+  px: {
+    system: "imperial",
+    factor: 1 / 72,
+  },
   pc: {
     system: "imperial",
     factor: 1 / 6,
@@ -37,7 +52,14 @@ const conversions = {
   },
 };
 
-const anchors = {
+type T_Anchor = {
+  [key in T_SYSTEM]: {
+    unit: T_UNITS;
+    ratio: number;
+  };
+};
+
+const anchors: T_Anchor = {
   metric: {
     unit: "m",
     ratio: 1 / 0.0254,
@@ -57,7 +79,7 @@ export function convertDistance(
   value: number,
   fromUnit: T_UNITS,
   toUnit: T_UNITS,
-  { pixelsPerInch = 96, precision, roundPixel = false }
+  { pixelsPerInch = 96, precision = 4, roundPixel = false }
 ) {
   if (typeof value !== "number" || !isFinite(value))
     throw new Error("Value must be a finite number");
@@ -105,16 +127,3 @@ export function convertDistance(
   }
   return result;
 }
-
-// export function convertDistance(
-//   dimension,
-//   unitsFrom = "px",
-//   unitsTo = "px",
-//   pixelsPerInch = 72
-// ) {
-//   return convertLength(dimension, unitsFrom, unitsTo, {
-//     pixelsPerInch,
-//     precision: 4,
-//     roundPixel: true,
-//   });
-// }

@@ -9,7 +9,16 @@ import {
   faFastForward,
   faFileVideo,
 } from "@fortawesome/free-solid-svg-icons";
+import { IRapidSketchSettings } from "..";
 
+interface IProps {
+  settings: IRapidSketchSettings;
+  frame: React.MutableRefObject<any>;
+  setFrame: (state: any) => void;
+  isPlaying: boolean;
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+  record: () => Promise<void>;
+}
 export function CommandBar({
   settings,
   frame,
@@ -17,7 +26,7 @@ export function CommandBar({
   isPlaying,
   setIsPlaying,
   record,
-}) {
+}: IProps) {
   return settings.animation ? (
     <div className="mx-auto text-center mt-5">
       <span className="border rounded px-2 py-2 select-none">

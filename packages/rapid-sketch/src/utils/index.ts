@@ -1,28 +1,9 @@
-export function createBlobFromDataURL(dataURL): Promise<Blob> {
-  return new Promise((resolve) => {
-    const splitIndex = dataURL.indexOf(",");
-    if (splitIndex === -1) {
-      resolve(new window.Blob());
-      return;
-    }
-    const base64 = dataURL.slice(splitIndex + 1);
-    const byteString = window.atob(base64);
-    const type = dataURL.slice(0, splitIndex);
-    const mimeMatch = /data:([^;]+)/.exec(type);
-    const mime = (mimeMatch ? mimeMatch[1] : "") || undefined;
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    resolve(new window.Blob([ab], { type: mime }));
-  });
-}
-
-export function promisfyCanvasToBlob(canvas): Promise<Blob> {
+export function promisfyCanvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
   return new Promise((resolve, reject) => {
     try {
-      canvas.toBlob(resolve);
+      canvas.toBlob((blob) => {
+        blob ? resolve(blob) : reject();
+      });
     } catch (err) {
       reject(err);
     }

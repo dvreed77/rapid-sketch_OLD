@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
 import { endStream, saveBlob, sendStreamBlob, startStream } from "./utils";
-import { ISettings } from "./index";
+import { IRapidSketchSettings, ISettings } from "./index";
 
 function useRefState(
   initialState: any
@@ -18,20 +18,36 @@ function useRefState(
   return [stateRef, setState];
 }
 
-const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
+interface IProps {
+  sketch: any;
+  settings: IRapidSketchSettings;
+}
+
+interface ICanvasProps {
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+  width: number;
+  height: number;
+  viewportWidth: number;
+  viewportHeight: number;
+  pixelRatio: number;
+}
+const App = ({ sketch, settings }: IProps) => {
   const [width, height] = settings.dimensions;
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [frame, setFrame] = useRefState(0);
-  const [canvasProps, setCanvasProps] = useState({
-    canvas: null,
-    context: null,
-    width: null,
-    height: null,
-    viewportWidth: null,
-    viewportHeight: null,
-    pixelRatio: null,
-  });
+  // const [canvasProps, setCanvasProps] = useState({
+  //   canvas: null,
+  //   context: null,
+  //   width: null,
+  //   height: null,
+  //   viewportWidth: null,
+  //   viewportHeight: null,
+  //   pixelRatio: null,
+  // });
+
+  const [canvasProps, setCanvasProps] = useState<ICanvasProps>();
 
   const renderFunc = useRef();
   document.title = `${settings.name} | RapidSketch`;
@@ -49,7 +65,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
 
     window.addEventListener("keydown", handleUserKeyPress);
 
-    if (canvasProps.context) {
+    if (canvasProps?.context) {
       render();
     }
 
@@ -59,6 +75,8 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   }, []);
 
   function initialize() {
+    if (!canvasProps) return;
+    console.log("init", canvasProps);
     const {
       context,
       width,
@@ -91,13 +109,16 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   useEffect(() => {
     if (!canvasProps) return;
 
+    console.dir(canvasProps);
     initialize();
     function handleUserKeyPress(e: KeyboardEvent) {
       if (e.code === "KeyS" && !e.altKey && e.metaKey) {
         e.preventDefault();
+
+        if (!canvasProps?.canvas) return;
         render();
         canvasProps.canvas.toBlob((blob) => {
-          saveBlob(blob, settings.name);
+          if (blob) saveBlob(blob, settings.name);
         });
       } else if (e.code === "KeyR") {
         initialize();
@@ -112,10 +133,10 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     return () => {
       window.removeEventListener("keydown", handleUserKeyPress);
     };
-  }, [canvasProps]);
+  }, [canvasProps?.canvas]);
 
   React.useEffect(() => {
-    let raf;
+    let raf = NaN;
     const animate = () => {
       if (isPlaying) {
         setCurrentFrame(
@@ -139,6 +160,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
   }, [isPlaying]);
 
   async function render() {
+    if (!canvasProps) return;
     const { context, width, height } = canvasProps;
     const rFunc = renderFunc.current as any;
     if (rFunc !== undefined) {
@@ -151,7 +173,7 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
 
     for (let i = 0; i <= settings.totalFrames; i++) {
       setCurrentFrame(i);
-      await sendStreamBlob(canvasProps.canvas);
+      if (canvasProps?.canvas) await sendStreamBlob(canvasProps.canvas);
     }
 
     await endStream();
@@ -161,6 +183,8 @@ const App = ({ sketch, settings }: { sketch: any; settings: ISettings }) => {
     setFrame(frame);
     render();
   }
+
+  console.log("render");
 
   return (
     <div>

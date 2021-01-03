@@ -3,7 +3,19 @@ import { render } from "react-dom";
 import App from "./App";
 import "./styles/index.css";
 
-export type T_UNITS = "mm" | "cm" | "m" | "pc" | "pt" | "in" | "ft" | "px";
+enum Unit {
+  mm = "mm",
+  cm = "cm",
+  m = "m",
+  pc = "pc",
+  pt = "pt",
+  in = "in",
+  ft = "ft",
+  px = "px",
+}
+
+export type T_UNITS = keyof typeof Unit;
+
 export interface ISketch {
   context: CanvasRenderingContext2D;
   width: number;
@@ -14,7 +26,7 @@ export interface ISketch {
 }
 
 export interface ISettings {
-  dimensions?: [number, number];
+  dimensions: [number, number];
   units?: T_UNITS;
   pixelsPerInch?: number;
   name: string;
@@ -24,13 +36,39 @@ export interface ISettings {
   pixelated?: boolean;
 }
 
+export interface IRapidSketchSettings {
+  dimensions: [number, number];
+  units: T_UNITS;
+  pixelsPerInch: number;
+  name: string;
+  animation: boolean;
+  totalFrames: number;
+  context: string;
+  pixelated: boolean;
+}
+
+const defaultSettings: IRapidSketchSettings = {
+  dimensions: [window.innerWidth, window.innerHeight],
+  units: "px",
+  pixelsPerInch: 72,
+  name: "sketch",
+  animation: false,
+  totalFrames: 500,
+  context: "2d",
+  pixelated: false,
+};
+
 export function canvasSketch(
   sketch: (d: ISketch) => (arg0: ISketch) => any,
   settings: ISettings
 ) {
   function renderApp() {
+    const rapidSketchSettings = {
+      ...defaultSettings,
+      ...settings,
+    };
     render(
-      React.createElement(App, { sketch, settings }),
+      React.createElement(App, { sketch, settings: rapidSketchSettings }),
       document.getElementById("root")
     );
   }

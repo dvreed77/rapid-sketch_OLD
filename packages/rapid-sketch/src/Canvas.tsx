@@ -18,10 +18,11 @@ export function Canvas({
   contextType,
   settings,
 }: IProps) {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [windowWidth, windowHeight] = useWindowSize();
 
   useEffect(() => {
+    console.log("useeffect, canvas");
     const units = "px";
     const pixelsPerInch = 72;
     const realWidth = convertDistance(width, units, "px", {
@@ -62,6 +63,8 @@ export function Canvas({
 
     const canvas = canvasRef.current;
 
+    if (!canvas) return;
+
     canvas.width = realWidth;
     canvas.height = realHeight;
 
@@ -73,13 +76,9 @@ export function Canvas({
 
     const context = canvas.getContext(contextType || "2d");
 
-    if (settings.pixelated) {
+    if (context && settings.pixelated) {
       context.imageSmoothingEnabled = false;
-      context.mozImageSmoothingEnabled = false;
-      context.oImageSmoothingEnabled = false;
-      context.webkitImageSmoothingEnabled = false;
-      context.msImageSmoothingEnabled = false;
-      canvas.style["image-rendering"] = "pixelated";
+      canvas.style.imageRendering = "pixelated";
     }
 
     setCanvasProps({
@@ -91,6 +90,42 @@ export function Canvas({
       viewportHeight,
       pixelRatio,
     });
+  }, []);
+
+  useEffect(() => {
+    const units = "px";
+    const pixelsPerInch = 72;
+    const realWidth = convertDistance(width, units, "px", {
+      pixelsPerInch,
+      precision: 4,
+    });
+    const realHeight = convertDistance(height, units, "px", {
+      pixelsPerInch,
+      precision: 4,
+    });
+    // Calculate Canvas Style Size
+    let styleWidth = Math.round(realWidth);
+    let styleHeight = Math.round(realHeight);
+    const aspect = width / height;
+    const windowAspect = windowWidth / windowHeight;
+    const scaleToFitPadding = 40;
+    const maxWidth = Math.round(windowWidth - scaleToFitPadding * 2);
+    const maxHeight = Math.round(windowHeight - scaleToFitPadding * 2);
+
+    if (windowAspect > aspect) {
+      styleHeight = maxHeight;
+      styleWidth = Math.round(styleHeight * aspect);
+    } else {
+      styleWidth = maxWidth;
+      styleHeight = Math.round(styleWidth / aspect);
+    }
+
+    const canvas = canvasRef.current;
+
+    if (!canvas) return;
+
+    canvas.style.width = `${styleWidth}px`;
+    canvas.style.height = `${styleHeight}px`;
   }, [windowWidth, windowHeight]);
 
   return <canvas ref={canvasRef}></canvas>;
