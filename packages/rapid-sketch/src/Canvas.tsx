@@ -1,28 +1,37 @@
 import React, { useEffect, useRef } from "react";
-import { ISettings } from "./index";
+import { ISettings, ObjectType, T_ContextType } from "./index";
 import { useWindowSize } from "./hooks/useWindowResize";
 import { convertDistance } from "./utils/convertDistance";
+import { ICanvasProps } from "./App";
 
-interface IProps {
+interface IProps<T extends T_ContextType> {
   width: number;
   height: number;
-  setCanvasProps: any;
-  contextType: any;
-  settings: ISettings;
+  setCanvasProps: React.Dispatch<
+    React.SetStateAction<ICanvasProps<T> | undefined>
+  >;
+  contextType: T;
+  settings: ISettings<T>;
 }
 
-export function Canvas({
+function getContext<T extends T_ContextType>(
+  canvas: HTMLCanvasElement,
+  type: T
+): ObjectType<T> {
+  return canvas.getContext(type) as ObjectType<T>;
+}
+
+export function Canvas<T extends T_ContextType>({
   width,
   height,
   setCanvasProps,
   contextType,
   settings,
-}: IProps) {
+}: IProps<T>) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [windowWidth, windowHeight] = useWindowSize();
 
   useEffect(() => {
-    console.log("useeffect, canvas");
     const units = "px";
     const pixelsPerInch = 72;
     const realWidth = convertDistance(width, units, "px", {
@@ -74,15 +83,19 @@ export function Canvas({
     const viewportWidth = Math.round(realWidth);
     const viewportHeight = Math.round(realHeight);
 
-    const context = canvas.getContext(contextType || "2d");
+    // const context = canvas.getContext(contextType || "2d");
 
-    if (context && settings.pixelated) {
-      context.imageSmoothingEnabled = false;
-      canvas.style.imageRendering = "pixelated";
-    }
+    const context = getContext(canvas, contextType);
+
+    if (!context) return;
+
+    // if (context && settings.pixelated) {
+    //   context.imageSmoothingEnabled = false;
+    //   canvas.style.imageRendering = "pixelated";
+    // }
 
     setCanvasProps({
-      canvas: canvasRef.current,
+      canvas,
       context,
       width: viewportWidth,
       height: viewportHeight,

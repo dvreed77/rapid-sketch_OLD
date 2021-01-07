@@ -9,24 +9,24 @@ import {
   faFastForward,
   faFileVideo,
 } from "@fortawesome/free-solid-svg-icons";
-import { ISettings } from "..";
+import { ISettings, T_ContextType } from "..";
 
-interface IProps {
-  settings: Required<ISettings>;
+interface IProps<T extends T_ContextType> {
+  settings: Required<ISettings<T>>;
   frame: React.MutableRefObject<any>;
   setFrame: (state: any) => void;
   isPlaying: boolean;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   record: () => Promise<void>;
 }
-export function CommandBar({
+export function CommandBar<T extends T_ContextType>({
   settings,
   frame,
   setFrame,
   isPlaying,
   setIsPlaying,
   record,
-}: IProps) {
+}: IProps<T>) {
   return settings.animation ? (
     <div className="mx-auto text-center mt-5">
       <span className="border rounded px-2 py-2 select-none">

@@ -9,4 +9,6 @@ export * from "./randomFloat";
 export * from "./randomInt";
 export * from "./randomPick";
 export * from "./weightedSet";
+export * from "./poissonSampling";
+
 export { SimplexNoise };

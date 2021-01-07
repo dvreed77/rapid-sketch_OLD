@@ -4,13 +4,14 @@
     "outDir": "dist",
     "declaration": true,
     "lib": [
-      "ES2015",
+      "ES2019",
       "DOM"
     ],
     "jsx": "react",
     "sourceMap": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "downlevelIteration": true
   },
   "include": [
     "src/**/*",

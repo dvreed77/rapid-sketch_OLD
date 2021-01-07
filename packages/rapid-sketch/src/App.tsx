@@ -2,33 +2,33 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
 import { endStream, saveBlob, sendStreamBlob, startStream } from "./utils";
-import { ISettings, ISketch } from "./index";
+import { ISettings, ISketch, ObjectType, T_ContextType } from "./index";
 import { useRefState } from "./utils/useRefState";
 
-interface IProps {
-  sketch: (arg0: ISketch) => (arg0: ISketch) => any;
-  settings: Required<ISettings>;
+interface IProps<T extends T_ContextType> {
+  sketch: (arg0: ISketch<T>) => (arg0: ISketch<T>) => any;
+  settings: Required<ISettings<T>>;
 }
 
-interface ICanvasProps {
+export interface ICanvasProps<T extends T_ContextType> {
   canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;
+  context: ObjectType<T>;
   width: number;
   height: number;
   viewportWidth: number;
   viewportHeight: number;
   pixelRatio: number;
 }
-const App = ({ sketch, settings }: IProps) => {
+function App<T extends T_ContextType>({ sketch, settings }: IProps<T>) {
   const [width, height] = settings.dimensions;
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [frame, setFrame] = useRefState(0);
   const [time, setTime] = useRefState(0);
 
-  const [canvasProps, setCanvasProps] = useState<ICanvasProps>();
+  const [canvasProps, setCanvasProps] = useState<ICanvasProps<T>>();
 
-  const renderFunc = useRef<(arg0: ISketch) => any>();
+  const renderFunc = useRef<(arg0: ISketch<T>) => any>();
   document.title = `${settings.name} | RapidSketch`;
 
   useEffect(() => {
@@ -51,7 +51,6 @@ const App = ({ sketch, settings }: IProps) => {
 
   function initialize() {
     if (!canvasProps) return;
-    console.log("init", canvasProps);
     const {
       context,
       width,
@@ -86,7 +85,6 @@ const App = ({ sketch, settings }: IProps) => {
     });
     renderFunc.current = rFunc;
 
-    // console.log(performance.now());
     setTime(performance.now());
 
     if (settings.animation && settings.autoPlay) setIsPlaying(true);
@@ -95,7 +93,6 @@ const App = ({ sketch, settings }: IProps) => {
   useEffect(() => {
     if (!canvasProps) return;
 
-    console.dir(canvasProps);
     initialize();
     function handleUserKeyPress(e: KeyboardEvent) {
       if (e.code === "KeyS" && !e.altKey && e.metaKey) {
@@ -176,6 +173,7 @@ const App = ({ sketch, settings }: IProps) => {
   }
 
   async function record() {
+    setIsPlaying(false);
     await startStream({ type: "mp4" });
 
     for (let i = 0; i <= settings.totalFrames; i++) {
@@ -212,6 +210,6 @@ const App = ({ sketch, settings }: IProps) => {
       />
     </div>
   );
-};
+}
 
 export default App;

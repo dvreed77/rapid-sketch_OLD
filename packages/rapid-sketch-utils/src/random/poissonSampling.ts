@@ -1,4 +1,4 @@
-export function* samples([min, max], n, k = 30) {
+export function* poissonSampling([min, max], n, k = 30) {
   if (!(max > min)) throw new Error("max > min");
   let width = max - min;
   let radius = width / (n * 1.5);

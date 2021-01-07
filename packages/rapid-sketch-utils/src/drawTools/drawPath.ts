@@ -1,3 +1,11 @@
+type T_DRAW_OPTIONS = {
+  drawPts: boolean;
+  lineWidth: number;
+  strokeColor: string | CanvasGradient;
+  fillColor: string | CanvasGradient;
+  closePath: boolean;
+};
+
 export function drawPath(
   context: CanvasRenderingContext2D,
   path: PointType[],
@@ -7,7 +15,7 @@ export function drawPath(
     strokeColor = "red",
     fillColor = "red",
     closePath = false,
-  } = {}
+  }: Partial<T_DRAW_OPTIONS> = {}
 ) {
   context.beginPath();
   context.moveTo(path[0][0], path[0][1]);
