@@ -6,7 +6,7 @@ const settings: ISettings = {
 };
 
 canvasSketch(() => {
-  return ({ context, width, height, deltaTime }) => {
+  return ({ context, width, height }) => {
     context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
     context.beginPath();

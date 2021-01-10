@@ -1,8 +1,7 @@
 import { canvasSketch } from "rapid-sketch";
-import { random } from "rapid-sketch-utils";
+import { color, random } from "rapid-sketch-utils";
 import * as THREE from "three";
 import * as d3 from "d3";
-import palettes from "nice-color-palettes";
 import SimplexNoise from "simplex-noise";
 
 const simplex = new SimplexNoise();
@@ -17,7 +16,7 @@ canvasSketch(
       context,
     });
 
-    const palette = random.randomPick(palettes);
+    const palette = random.randomPick(color.palettes);
 
     // WebGL background color
     renderer.setClearColor("hsl(0, 0%, 95%)", 1);

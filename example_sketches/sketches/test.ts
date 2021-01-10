@@ -1,4 +1,4 @@
-import { canvasSketch } from "../main";
+import { canvasSketch } from "rapid-sketch";
 
 canvasSketch(
   () => {

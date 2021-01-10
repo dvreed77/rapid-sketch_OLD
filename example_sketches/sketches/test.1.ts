@@ -1,6 +1,6 @@
-import { canvasSketch } from "../main";
+import { canvasSketch } from "rapid-sketch";
 // import {lerp} from 'canvas-sketch-util/math'
-import { lerp, rangeFloor, random, color } from "rapid-sketch-util";
+import { random, color, utils } from "rapid-sketch-utils";
 
 canvasSketch(
   () => {
@@ -27,27 +27,11 @@ canvasSketch(
 
       const points = createGrid();
 
-      // points.forEach((data) => {
-      //   const {
-      //     position: [u, v],
-      //   } = data;
-
-      //   context.beginPath();
-      //   context.arc(
-      //     lerp(margin, width - margin, u),
-      //     lerp(margin, height - margin, v),
-      //     10,
-      //     0,
-      //     2 * Math.PI
-      //   );
-      //   context.fillStyle = "red";
-      //   context.fill();
-      // });
       let points2 = [...points];
 
       const tops = [];
       while (points2.length) {
-        const tmp = random.shuffle(points2);
+        const tmp = random.randomShuffle(points2);
         const [a, b] = tmp.slice(0, 2);
         points2 = [...tmp.slice(2)];
         tops.push([a, b]);
@@ -66,22 +50,22 @@ canvasSketch(
 
         context.beginPath();
         context.moveTo(
-          lerp(margin, width - margin, u1),
-          lerp(margin, width - margin, v1)
+          utils.lerp(margin, width - margin, u1),
+          utils.lerp(margin, width - margin, v1)
         );
         context.lineTo(
-          lerp(margin, width - margin, u2),
-          lerp(margin, width - margin, v2)
-        );
-
-        context.lineTo(
-          lerp(margin, width - margin, u2),
-          lerp(margin, width - margin, 1)
+          utils.lerp(margin, width - margin, u2),
+          utils.lerp(margin, width - margin, v2)
         );
 
         context.lineTo(
-          lerp(margin, width - margin, u1),
-          lerp(margin, width - margin, 1)
+          utils.lerp(margin, width - margin, u2),
+          utils.lerp(margin, width - margin, 1)
+        );
+
+        context.lineTo(
+          utils.lerp(margin, width - margin, u1),
+          utils.lerp(margin, width - margin, 1)
         );
 
         context.closePath();

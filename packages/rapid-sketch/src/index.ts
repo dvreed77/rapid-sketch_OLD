@@ -35,7 +35,7 @@ export interface ISketch<T extends T_ContextType> {
   pixelRatio: number;
 }
 
-export interface ISettings<T extends T_ContextType> {
+export interface ISettings<T extends T_ContextType = "2d"> {
   dimensions: [number, number];
   units?: T_UNITS;
   pixelsPerInch?: number;

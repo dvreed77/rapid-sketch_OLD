@@ -19,7 +19,10 @@ canvasSketch(
     camera.position.set(3, 3, -5);
     camera.lookAt(new THREE.Vector3());
 
-    const controls = new OrbitControls(camera, context.canvas);
+    const controls = new OrbitControls(
+      camera,
+      context.canvas as HTMLCanvasElement
+    );
 
     const scene = new THREE.Scene();
 

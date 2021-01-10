@@ -1,5 +1,4 @@
-// import { canvasSketch, ISettings } from "rapid-sketch";
-import { canvasSketch, ISettings } from "../main";
+import { canvasSketch, ISettings } from "rapid-sketch";
 
 const settings: ISettings = {
   dimensions: [2000, 2000],

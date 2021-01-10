@@ -1,5 +1,5 @@
-import { canvasSketch, ISettings } from "../main";
-import { drawPath, map } from "rapid-sketch-util";
+import { canvasSketch, ISettings } from "rapid-sketch";
+import { utils, drawTools } from "rapid-sketch-utils";
 import * as d3 from "d3";
 
 const settings: ISettings = {
@@ -34,7 +34,7 @@ function draw(context: CanvasRenderingContext2D) {
   for (let i = 0; i < nOffsets; i++) {
     const polygonPts = genPolygon(3, offsetScale(i));
     context.rotate(Math.PI * -0.004);
-    drawPath(context, polygonPts, {
+    drawTools.drawPath(context, polygonPts, {
       strokeColor: "#219ebc",
       lineWidth: lineWidthScale(i),
       closePath: true,

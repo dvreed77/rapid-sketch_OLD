@@ -5,6 +5,8 @@ import { bufferToStream } from "./utils/bufferToStream";
 import bodyParser from "body-parser";
 import { getNextFilepath } from "./utils/getNextFilepath";
 import mime from "mime-types";
+import path from "path";
+import fs from "fs";
 
 export const router = ({ sketchFilePath }) => {
   const sketchName = sketchFilePath.replace(/\.[^/.]+$/, "");
@@ -18,6 +20,11 @@ export const router = ({ sketchFilePath }) => {
     const { type } = req.body;
 
     const outputFilename = getNextFilepath(sketchName, type, "output", true);
+
+    const dirName = path.dirname(outputFilename);
+    if (!fs.existsSync(dirName)) {
+      fs.mkdirSync(dirName);
+    }
 
     currentStream = await createStream({
       filename: outputFilename,
