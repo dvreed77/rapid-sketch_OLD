@@ -3,5 +3,5 @@
     "packages/*",
     "example_sketches"
   ],
-  "version": "0.0.4"
+  "version": "independent"
 }

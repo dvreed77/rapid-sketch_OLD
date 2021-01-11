@@ -1,0 +1,352 @@
+0 silly argv {
+0 silly argv   _: [ 'version' ],
+0 silly argv   'conventional-commits': true,
+0 silly argv   conventionalCommits: true,
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': '/usr/local/bin/lerna'
+0 silly argv }
+1 notice cli v3.22.1
+2 verbose rootPath /Users/dreed/code/rapid-sketch
+3 info current version 0.0.3
+4 silly isAnythingCommitted
+5 verbose isAnythingCommitted 1
+6 silly currentBranch
+7 verbose currentBranch main
+8 silly remoteBranchExists
+9 silly isBehindUpstream
+10 silly isBehindUpstream main is behind origin/main by 0 commit(s) and ahead by 1
+11 silly hasTags
+12 verbose hasTags true
+13 silly git-describe.sync "v0.0.3-17-g0b6e7c8" => {"lastTagName":"v0.0.3","lastVersion":"v0.0.3","refCount":"17","sha":"0b6e7c8","isDirty":false}
+14 info Looking for changed packages since v0.0.3
+15 silly checking diff example_sketches
+16 silly found diff in example_sketches/.gitignore
+16 silly found diff in example_sketches/assets/earth.jpg
+16 silly found diff in example_sketches/assets/moon.jpg
+16 silly found diff in example_sketches/declaration.d.ts
+16 silly found diff in example_sketches/global.d.ts
+16 silly found diff in example_sketches/output/dave-2020.12.22-13.02.51.png
+16 silly found diff in example_sketches/output/sketch2-2020.11.29-21.16.55.png
+16 silly found diff in example_sketches/output/sketch5_000.png
+16 silly found diff in example_sketches/output/sketch5_001.png
+16 silly found diff in example_sketches/output/sketch5_002.png
+16 silly found diff in example_sketches/output/sketch5_003.png
+16 silly found diff in example_sketches/output/sketch5_004.png
+16 silly found diff in example_sketches/output/sketch5_005.png
+16 silly found diff in example_sketches/output/sketch5_006.png
+16 silly found diff in example_sketches/output/sketch5_007.png
+16 silly found diff in example_sketches/package-lock.json
+16 silly found diff in example_sketches/package.json
+16 silly found diff in example_sketches/shaders/frag-shader.6.glsl
+16 silly found diff in example_sketches/shaders/frag-shader.glsl
+16 silly found diff in example_sketches/sketches/basicShaderThree/index.ts
+16 silly found diff in example_sketches/sketches/basicShaderThree/shader/frag.glsl
+16 silly found diff in example_sketches/sketches/basicShaderThree/shader/index.ts
+16 silly found diff in example_sketches/sketches/basicShaderThree/shader/vert.glsl
+16 silly found diff in example_sketches/sketches/sketch1.ts
+16 silly found diff in example_sketches/sketches/sketch2.ts
+16 silly found diff in example_sketches/sketches/sketch3.ts
+16 silly found diff in example_sketches/sketches/sketch4.ts
+16 silly found diff in example_sketches/sketches/test.1.ts
+16 silly found diff in example_sketches/sketches/test.ts
+16 silly found diff in example_sketches/sketches/threejs.ts
+16 silly found diff in example_sketches/sketches/threejs_2.ts
+16 silly found diff in example_sketches/sketches/threejs_3.ts
+16 silly found diff in example_sketches/sketches/threejs_4.ts
+16 silly found diff in example_sketches/sketches/threejs_5.ts
+16 silly found diff in example_sketches/sketches/threejs_6.ts
+16 silly found diff in example_sketches/tsconfig.json
+17 verbose filtered diff [
+17 verbose filtered diff   'example_sketches/.gitignore',
+17 verbose filtered diff   'example_sketches/assets/earth.jpg',
+17 verbose filtered diff   'example_sketches/assets/moon.jpg',
+17 verbose filtered diff   'example_sketches/declaration.d.ts',
+17 verbose filtered diff   'example_sketches/global.d.ts',
+17 verbose filtered diff   'example_sketches/output/dave-2020.12.22-13.02.51.png',
+17 verbose filtered diff   'example_sketches/output/sketch2-2020.11.29-21.16.55.png',
+17 verbose filtered diff   'example_sketches/output/sketch5_000.png',
+17 verbose filtered diff   'example_sketches/output/sketch5_001.png',
+17 verbose filtered diff   'example_sketches/output/sketch5_002.png',
+17 verbose filtered diff   'example_sketches/output/sketch5_003.png',
+17 verbose filtered diff   'example_sketches/output/sketch5_004.png',
+17 verbose filtered diff   'example_sketches/output/sketch5_005.png',
+17 verbose filtered diff   'example_sketches/output/sketch5_006.png',
+17 verbose filtered diff   'example_sketches/output/sketch5_007.png',
+17 verbose filtered diff   'example_sketches/package-lock.json',
+17 verbose filtered diff   'example_sketches/package.json',
+17 verbose filtered diff   'example_sketches/shaders/frag-shader.6.glsl',
+17 verbose filtered diff   'example_sketches/shaders/frag-shader.glsl',
+17 verbose filtered diff   'example_sketches/sketches/basicShaderThree/index.ts',
+17 verbose filtered diff   'example_sketches/sketches/basicShaderThree/shader/frag.glsl',
+17 verbose filtered diff   'example_sketches/sketches/basicShaderThree/shader/index.ts',
+17 verbose filtered diff   'example_sketches/sketches/basicShaderThree/shader/vert.glsl',
+17 verbose filtered diff   'example_sketches/sketches/sketch1.ts',
+17 verbose filtered diff   'example_sketches/sketches/sketch2.ts',
+17 verbose filtered diff   'example_sketches/sketches/sketch3.ts',
+17 verbose filtered diff   'example_sketches/sketches/sketch4.ts',
+17 verbose filtered diff   'example_sketches/sketches/test.1.ts',
+17 verbose filtered diff   'example_sketches/sketches/test.ts',
+17 verbose filtered diff   'example_sketches/sketches/threejs.ts',
+17 verbose filtered diff   'example_sketches/sketches/threejs_2.ts',
+17 verbose filtered diff   'example_sketches/sketches/threejs_3.ts',
+17 verbose filtered diff   'example_sketches/sketches/threejs_4.ts',
+17 verbose filtered diff   'example_sketches/sketches/threejs_5.ts',
+17 verbose filtered diff   'example_sketches/sketches/threejs_6.ts',
+17 verbose filtered diff   'example_sketches/tsconfig.json'
+17 verbose filtered diff ]
+18 silly checking diff packages/rapid-sketch-cli
+19 silly found diff in packages/rapid-sketch-cli/package-lock.json
+19 silly found diff in packages/rapid-sketch-cli/package.json
+19 silly found diff in packages/rapid-sketch-cli/rollup.config.js
+19 silly found diff in packages/rapid-sketch-cli/src/ffmpeg/createStream.ts
+19 silly found diff in packages/rapid-sketch-cli/src/ffmpeg/getFfmpegCommand.ts
+19 silly found diff in packages/rapid-sketch-cli/src/ffmpeg/test.ts
+19 silly found diff in packages/rapid-sketch-cli/src/index.ts
+19 silly found diff in packages/rapid-sketch-cli/src/routes.ts
+19 silly found diff in packages/rapid-sketch-cli/src/utils/getNextFilepath.ts
+20 verbose filtered diff [
+20 verbose filtered diff   'packages/rapid-sketch-cli/package-lock.json',
+20 verbose filtered diff   'packages/rapid-sketch-cli/package.json',
+20 verbose filtered diff   'packages/rapid-sketch-cli/rollup.config.js',
+20 verbose filtered diff   'packages/rapid-sketch-cli/src/ffmpeg/createStream.ts',
+20 verbose filtered diff   'packages/rapid-sketch-cli/src/ffmpeg/getFfmpegCommand.ts',
+20 verbose filtered diff   'packages/rapid-sketch-cli/src/ffmpeg/test.ts',
+20 verbose filtered diff   'packages/rapid-sketch-cli/src/index.ts',
+20 verbose filtered diff   'packages/rapid-sketch-cli/src/routes.ts',
+20 verbose filtered diff   'packages/rapid-sketch-cli/src/utils/getNextFilepath.ts'
+20 verbose filtered diff ]
+21 silly checking diff packages/rapid-sketch-utils
+22 silly found diff in packages/rapid-sketch-utils/__tests__/rapid-sketch-utils.test.js
+22 silly found diff in packages/rapid-sketch-utils/lib/rapid-sketch-utils.js
+22 silly found diff in packages/rapid-sketch-utils/package-lock.json
+22 silly found diff in packages/rapid-sketch-utils/package.json
+22 silly found diff in packages/rapid-sketch-utils/rollup.config.js
+22 silly found diff in packages/rapid-sketch-utils/src/bezier/getBezier.ts
+22 silly found diff in packages/rapid-sketch-utils/src/bezier/getBezierPolygon.ts
+22 silly found diff in packages/rapid-sketch-utils/src/bezier/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/bezier/lineBezierIntersection.ts
+22 silly found diff in packages/rapid-sketch-utils/src/bezier/splitBezier.ts
+22 silly found diff in packages/rapid-sketch-utils/src/color/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/color/palettes.json
+22 silly found diff in packages/rapid-sketch-utils/src/drawTools/drawBezierPath.ts
+22 silly found diff in packages/rapid-sketch-utils/src/drawTools/drawBezierPolygon.ts
+22 silly found diff in packages/rapid-sketch-utils/src/drawTools/drawCircle.ts
+22 silly found diff in packages/rapid-sketch-utils/src/drawTools/drawExtent.ts
+22 silly found diff in packages/rapid-sketch-utils/src/drawTools/drawPath.ts
+22 silly found diff in packages/rapid-sketch-utils/src/drawTools/drawPt.ts
+22 silly found diff in packages/rapid-sketch-utils/src/drawTools/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/Particle.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/Shape.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/Vector.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/circlePathIntersection.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/lineSegmentTree.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/offsetPolygon.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/pointInPolygon.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/pointLineSegmentDistance.ts
+22 silly found diff in packages/rapid-sketch-utils/src/geometry/pointPointSquaredDistance.ts
+22 silly found diff in packages/rapid-sketch-utils/src/global.d.ts
+22 silly found diff in packages/rapid-sketch-utils/src/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/math/cubeRoots.ts
+22 silly found diff in packages/rapid-sketch-utils/src/math/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/math/quadratic.ts
+22 silly found diff in packages/rapid-sketch-utils/src/pathGenerators/chaikin.ts
+22 silly found diff in packages/rapid-sketch-utils/src/pathGenerators/genTwirl.ts
+22 silly found diff in packages/rapid-sketch-utils/src/pathGenerators/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/poissonSampling.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/randomChance.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/randomF.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/randomFloat.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/randomInt.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/randomPick.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/randomShuffle.ts
+22 silly found diff in packages/rapid-sketch-utils/src/random/weightedSet.ts
+22 silly found diff in packages/rapid-sketch-utils/src/svg/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/svg/readSVG.ts
+22 silly found diff in packages/rapid-sketch-utils/src/svg/utils.ts
+22 silly found diff in packages/rapid-sketch-utils/src/svg/writeSVG.ts
+22 silly found diff in packages/rapid-sketch-utils/src/utils/constrain.ts
+22 silly found diff in packages/rapid-sketch-utils/src/utils/convertDistance.ts
+22 silly found diff in packages/rapid-sketch-utils/src/utils/getBoundingBox.ts
+22 silly found diff in packages/rapid-sketch-utils/src/utils/index.ts
+22 silly found diff in packages/rapid-sketch-utils/src/utils/kmap.ts
+22 silly found diff in packages/rapid-sketch-utils/src/utils/lerp.ts
+22 silly found diff in packages/rapid-sketch-utils/src/utils/map.ts
+22 silly found diff in packages/rapid-sketch-utils/src/utils/poissonDiscSampler.ts
+22 silly found diff in packages/rapid-sketch-utils/tsconfig.json
+23 verbose filtered diff [
+23 verbose filtered diff   'packages/rapid-sketch-utils/__tests__/rapid-sketch-utils.test.js',
+23 verbose filtered diff   'packages/rapid-sketch-utils/lib/rapid-sketch-utils.js',
+23 verbose filtered diff   'packages/rapid-sketch-utils/package-lock.json',
+23 verbose filtered diff   'packages/rapid-sketch-utils/package.json',
+23 verbose filtered diff   'packages/rapid-sketch-utils/rollup.config.js',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/bezier/getBezier.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/bezier/getBezierPolygon.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/bezier/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/bezier/lineBezierIntersection.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/bezier/splitBezier.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/color/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/color/palettes.json',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/drawTools/drawBezierPath.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/drawTools/drawBezierPolygon.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/drawTools/drawCircle.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/drawTools/drawExtent.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/drawTools/drawPath.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/drawTools/drawPt.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/drawTools/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/Particle.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/Shape.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/Vector.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/circlePathIntersection.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/lineSegmentTree.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/offsetPolygon.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/pointInPolygon.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/pointLineSegmentDistance.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/geometry/pointPointSquaredDistance.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/global.d.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/math/cubeRoots.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/math/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/math/quadratic.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/pathGenerators/chaikin.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/pathGenerators/genTwirl.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/pathGenerators/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/poissonSampling.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/randomChance.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/randomF.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/randomFloat.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/randomInt.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/randomPick.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/randomShuffle.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/random/weightedSet.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/svg/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/svg/readSVG.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/svg/utils.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/svg/writeSVG.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/utils/constrain.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/utils/convertDistance.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/utils/getBoundingBox.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/utils/index.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/utils/kmap.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/utils/lerp.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/utils/map.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/src/utils/poissonDiscSampler.ts',
+23 verbose filtered diff   'packages/rapid-sketch-utils/tsconfig.json'
+23 verbose filtered diff ]
+24 silly checking diff packages/rapid-sketch
+25 silly found diff in packages/rapid-sketch/package-lock.json
+25 silly found diff in packages/rapid-sketch/src/App.tsx
+25 silly found diff in packages/rapid-sketch/src/Canvas.tsx
+25 silly found diff in packages/rapid-sketch/src/components/CommandBar.tsx
+25 silly found diff in packages/rapid-sketch/src/global.d.ts
+25 silly found diff in packages/rapid-sketch/src/index.ts
+25 silly found diff in packages/rapid-sketch/src/utils/convertDistance.ts
+25 silly found diff in packages/rapid-sketch/src/utils/index.ts
+25 silly found diff in packages/rapid-sketch/src/utils/useRefState.ts
+25 silly found diff in packages/rapid-sketch/tsconfig.json
+26 verbose filtered diff [
+26 verbose filtered diff   'packages/rapid-sketch/package-lock.json',
+26 verbose filtered diff   'packages/rapid-sketch/src/App.tsx',
+26 verbose filtered diff   'packages/rapid-sketch/src/Canvas.tsx',
+26 verbose filtered diff   'packages/rapid-sketch/src/components/CommandBar.tsx',
+26 verbose filtered diff   'packages/rapid-sketch/src/global.d.ts',
+26 verbose filtered diff   'packages/rapid-sketch/src/index.ts',
+26 verbose filtered diff   'packages/rapid-sketch/src/utils/convertDistance.ts',
+26 verbose filtered diff   'packages/rapid-sketch/src/utils/index.ts',
+26 verbose filtered diff   'packages/rapid-sketch/src/utils/useRefState.ts',
+26 verbose filtered diff   'packages/rapid-sketch/tsconfig.json'
+26 verbose filtered diff ]
+27 verbose updated example_sketches
+28 verbose updated rapid-sketch-cli
+29 verbose updated rapid-sketch-utils
+30 verbose updated rapid-sketch
+31 verbose git-describe undefined => "v0.0.3-17-g0b6e7c8"
+32 silly git-describe parsed => {"lastTagName":"v0.0.3","lastVersion":"v0.0.3","refCount":"17","sha":"0b6e7c8","isDirty":false}
+33 silly fixed for example_sketches at /Users/dreed/code/rapid-sketch/example_sketches
+34 verbose getChangelogConfig using preset "conventional-changelog-angular"
+35 silly npa Result {
+35 silly npa   type: 'tag',
+35 silly npa   registry: true,
+35 silly npa   where: undefined,
+35 silly npa   raw: 'conventional-changelog-angular',
+35 silly npa   name: 'conventional-changelog-angular',
+35 silly npa   escapedName: 'conventional-changelog-angular',
+35 silly npa   scope: undefined,
+35 silly npa   rawSpec: '',
+35 silly npa   saveSpec: null,
+35 silly npa   fetchSpec: 'latest',
+35 silly npa   gitRange: undefined,
+35 silly npa   gitCommittish: undefined,
+35 silly npa   hosted: undefined
+35 silly npa }
+36 verbose getChangelogConfig Attempting to resolve preset "conventional-changelog-angular"
+37 info getChangelogConfig Successfully resolved preset "conventional-changelog-angular"
+38 verbose fixed increment 0.0.3 by patch
+39 silly fixed for rapid-sketch-cli at /Users/dreed/code/rapid-sketch/packages/rapid-sketch-cli
+40 verbose fixed increment 0.0.3 by patch
+41 silly fixed for rapid-sketch-utils at /Users/dreed/code/rapid-sketch/packages/rapid-sketch-utils
+42 verbose fixed increment 0.0.3 by patch
+43 silly fixed for rapid-sketch at /Users/dreed/code/rapid-sketch/packages/rapid-sketch
+44 verbose fixed increment 0.0.3 by patch
+45 info execute Skipping releases
+46 silly lifecycle No script for "preversion" in "root", continuing
+47 silly lifecycle No script for "preversion" in "rapid-sketch-utils", continuing
+48 silly lifecycle No script for "preversion" in "rapid-sketch", continuing
+49 silly lifecycle No script for "version" in "rapid-sketch", continuing
+50 silly fixed for rapid-sketch at /Users/dreed/code/rapid-sketch/packages/rapid-sketch
+51 silly lifecycle No script for "version" in "rapid-sketch-utils", continuing
+52 silly fixed for rapid-sketch-utils at /Users/dreed/code/rapid-sketch/packages/rapid-sketch-utils
+53 silly fixed writing new entry: "## [0.0.4](https://github.com/dvreed77/rapid-sketch/compare/v0.0.3...v0.0.4) (2021-01-11)\n\n**Note:** Version bump only for package rapid-sketch\n\n\n\n"
+54 silly fixed writing new entry: "## [0.0.4](https://github.com/dvreed77/rapid-sketch/compare/v0.0.3...v0.0.4) (2021-01-11)\n\n**Note:** Version bump only for package rapid-sketch-utils\n\n\n\n"
+55 verbose fixed wrote /Users/dreed/code/rapid-sketch/packages/rapid-sketch/CHANGELOG.md
+56 silly lifecycle No script for "preversion" in "rapid-sketch-cli", continuing
+57 verbose fixed wrote /Users/dreed/code/rapid-sketch/packages/rapid-sketch-utils/CHANGELOG.md
+58 silly lifecycle No script for "version" in "rapid-sketch-cli", continuing
+59 silly fixed for rapid-sketch-cli at /Users/dreed/code/rapid-sketch/packages/rapid-sketch-cli
+60 silly fixed writing new entry: "## [0.0.4](https://github.com/dvreed77/rapid-sketch/compare/v0.0.3...v0.0.4) (2021-01-11)\n\n**Note:** Version bump only for package rapid-sketch-cli\n\n\n\n"
+61 verbose fixed wrote /Users/dreed/code/rapid-sketch/packages/rapid-sketch-cli/CHANGELOG.md
+62 silly lifecycle No script for "preversion" in "example_sketches", continuing
+63 silly lifecycle No script for "version" in "example_sketches", continuing
+64 silly fixed for example_sketches at /Users/dreed/code/rapid-sketch/example_sketches
+65 silly fixed writing new entry: "## [0.0.4](https://github.com/dvreed77/rapid-sketch/compare/v0.0.3...v0.0.4) (2021-01-11)\n\n**Note:** Version bump only for package example_sketches\n\n\n\n"
+66 verbose fixed wrote /Users/dreed/code/rapid-sketch/example_sketches/CHANGELOG.md
+67 silly root for root at /Users/dreed/code/rapid-sketch
+68 silly root writing new entry: "## [0.0.4](https://github.com/dvreed77/rapid-sketch/compare/v0.0.3...v0.0.4) (2021-01-11)\n\n**Note:** Version bump only for package root\n\n\n\n"
+69 verbose root wrote /Users/dreed/code/rapid-sketch/CHANGELOG.md
+70 silly lifecycle No script for "version" in "root", continuing
+71 silly gitAdd [
+71 silly gitAdd   'packages/rapid-sketch/package.json',
+71 silly gitAdd   'packages/rapid-sketch/package-lock.json',
+71 silly gitAdd   'packages/rapid-sketch-utils/package.json',
+71 silly gitAdd   'packages/rapid-sketch-utils/package-lock.json',
+71 silly gitAdd   'packages/rapid-sketch/CHANGELOG.md',
+71 silly gitAdd   'packages/rapid-sketch-utils/CHANGELOG.md',
+71 silly gitAdd   'packages/rapid-sketch-cli/package.json',
+71 silly gitAdd   'packages/rapid-sketch-cli/package-lock.json',
+71 silly gitAdd   'packages/rapid-sketch-cli/CHANGELOG.md',
+71 silly gitAdd   'example_sketches/package.json',
+71 silly gitAdd   'example_sketches/package-lock.json',
+71 silly gitAdd   'example_sketches/CHANGELOG.md',
+71 silly gitAdd   'CHANGELOG.md',
+71 silly gitAdd   'lerna.json'
+71 silly gitAdd ]
+72 silly gitCommit v0.0.4
+73 verbose git [ 'commit', '-m', 'v0.0.4' ]
+74 silly gitTag v0.0.4
+75 verbose git [ 'tag', 'v0.0.4', '-m', 'v0.0.4' ]
+76 silly lifecycle No script for "postversion" in "example_sketches", continuing
+77 silly lifecycle No script for "postversion" in "rapid-sketch-cli", continuing
+78 silly lifecycle No script for "postversion" in "rapid-sketch-utils", continuing
+79 silly lifecycle No script for "postversion" in "rapid-sketch", continuing
+80 silly lifecycle No script for "postversion" in "root", continuing
+81 info git Pushing tags...
+82 silly gitPush origin main
+83 error Error: Command failed: git push --follow-tags --no-verify --atomic origin main
+83 error remote: Permission to dvreed77/rapid-sketch.git denied to DaveReedTR.
+83 error fatal: unable to access 'https://github.com/dvreed77/rapid-sketch/': The requested URL returned error: 403
+83 error
+83 error     at makeError (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:174:9)
+83 error     at /usr/local/lib/node_modules/lerna/node_modules/execa/index.js:278:16
