@@ -1,0 +1,116 @@
+0 silly argv {
+0 silly argv   _: [ 'version' ],
+0 silly argv   'conventional-commits': true,
+0 silly argv   conventionalCommits: true,
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': '/usr/local/bin/lerna'
+0 silly argv }
+1 notice cli v3.22.1
+2 verbose rootPath /Users/dreed/code/rapid-sketch
+3 info versioning independent
+4 silly isAnythingCommitted
+5 verbose isAnythingCommitted 1
+6 silly currentBranch
+7 verbose currentBranch main
+8 silly remoteBranchExists
+9 silly isBehindUpstream
+10 silly isBehindUpstream main is behind origin/main by 0 commit(s) and ahead by 1
+11 silly hasTags
+12 verbose hasTags true
+13 silly git-describe.sync "v0.0.4-2-g0a5b098" => {"lastTagName":"v0.0.4","lastVersion":"v0.0.4","refCount":"2","sha":"0a5b098","isDirty":false}
+14 info Looking for changed packages since v0.0.4
+15 silly checking diff example_sketches
+16 silly no diff found in example_sketches
+17 silly checking diff packages/rapid-sketch-cli
+18 silly no diff found in rapid-sketch-cli
+19 silly checking diff packages/rapid-sketch-utils
+20 silly no diff found in rapid-sketch-utils
+21 silly checking diff packages/rapid-sketch
+22 silly found diff in packages/rapid-sketch/src/App.tsx
+23 verbose filtered diff [ 'packages/rapid-sketch/src/App.tsx' ]
+24 verbose updated example_sketches
+25 verbose updated rapid-sketch-cli
+26 verbose updated rapid-sketch
+27 verbose git-describe undefined => "v0.0.4-2-g0a5b098"
+28 silly git-describe parsed => {"lastTagName":"v0.0.4","lastVersion":"v0.0.4","refCount":"2","sha":"0a5b098","isDirty":false}
+29 silly independent for example_sketches at /Users/dreed/code/rapid-sketch/example_sketches
+30 verbose getChangelogConfig using preset "conventional-changelog-angular"
+31 silly npa Result {
+31 silly npa   type: 'tag',
+31 silly npa   registry: true,
+31 silly npa   where: undefined,
+31 silly npa   raw: 'conventional-changelog-angular',
+31 silly npa   name: 'conventional-changelog-angular',
+31 silly npa   escapedName: 'conventional-changelog-angular',
+31 silly npa   scope: undefined,
+31 silly npa   rawSpec: '',
+31 silly npa   saveSpec: null,
+31 silly npa   fetchSpec: 'latest',
+31 silly npa   gitRange: undefined,
+31 silly npa   gitCommittish: undefined,
+31 silly npa   hosted: undefined
+31 silly npa }
+32 verbose getChangelogConfig Attempting to resolve preset "conventional-changelog-angular"
+33 info getChangelogConfig Successfully resolved preset "conventional-changelog-angular"
+34 verbose independent increment 0.0.4 by patch
+35 silly independent for rapid-sketch-cli at /Users/dreed/code/rapid-sketch/packages/rapid-sketch-cli
+36 verbose independent increment 0.0.4 by patch
+37 silly independent for rapid-sketch at /Users/dreed/code/rapid-sketch/packages/rapid-sketch
+38 verbose independent increment 0.0.4 by patch
+39 info execute Skipping releases
+40 silly lifecycle No script for "preversion" in "root", continuing
+41 silly lifecycle No script for "preversion" in "rapid-sketch", continuing
+42 silly lifecycle No script for "version" in "rapid-sketch", continuing
+43 silly independent for rapid-sketch at /Users/dreed/code/rapid-sketch/packages/rapid-sketch
+44 silly independent writing new entry: "## 0.0.5 (2021-01-11)\n\n\n\n## 0.0.4 (2021-01-11)\n\n\n\n## 0.0.3 (2020-12-22)\n\n\n\n## 0.0.2 (2020-12-20)\n\n\n\n## 0.0.1 (2020-12-20)\n\n**Note:** Version bump only for package rapid-sketch\n\n\n\n"
+45 verbose independent wrote /Users/dreed/code/rapid-sketch/packages/rapid-sketch/CHANGELOG.md
+46 silly lifecycle No script for "preversion" in "rapid-sketch-cli", continuing
+47 silly lifecycle No script for "version" in "rapid-sketch-cli", continuing
+48 silly independent for rapid-sketch-cli at /Users/dreed/code/rapid-sketch/packages/rapid-sketch-cli
+49 silly independent writing new entry: "## 0.0.5 (2021-01-11)\n\n\n\n## 0.0.4 (2021-01-11)\n\n\n\n## 0.0.3 (2020-12-22)\n\n**Note:** Version bump only for package rapid-sketch-cli\n\n\n\n"
+50 verbose independent wrote /Users/dreed/code/rapid-sketch/packages/rapid-sketch-cli/CHANGELOG.md
+51 silly lifecycle No script for "preversion" in "example_sketches", continuing
+52 silly lifecycle No script for "version" in "example_sketches", continuing
+53 silly independent for example_sketches at /Users/dreed/code/rapid-sketch/example_sketches
+54 silly independent writing new entry: "## 0.0.5 (2021-01-11)\n\n\n\n## 0.0.4 (2021-01-11)\n\n\n\n## 0.0.3 (2020-12-22)\n\n**Note:** Version bump only for package example_sketches\n\n\n\n"
+55 verbose independent wrote /Users/dreed/code/rapid-sketch/example_sketches/CHANGELOG.md
+56 silly lifecycle No script for "version" in "root", continuing
+57 silly gitAdd [
+57 silly gitAdd   'packages/rapid-sketch/package.json',
+57 silly gitAdd   'packages/rapid-sketch/package-lock.json',
+57 silly gitAdd   'packages/rapid-sketch/CHANGELOG.md',
+57 silly gitAdd   'packages/rapid-sketch-cli/package.json',
+57 silly gitAdd   'packages/rapid-sketch-cli/package-lock.json',
+57 silly gitAdd   'packages/rapid-sketch-cli/CHANGELOG.md',
+57 silly gitAdd   'example_sketches/package.json',
+57 silly gitAdd   'example_sketches/package-lock.json',
+57 silly gitAdd   'example_sketches/CHANGELOG.md'
+57 silly gitAdd ]
+58 silly gitCommit Publish
+58 silly gitCommit
+58 silly gitCommit  - example_sketches@0.0.5
+58 silly gitCommit  - rapid-sketch-cli@0.0.5
+58 silly gitCommit  - rapid-sketch@0.0.5
+59 verbose git [
+59 verbose git   'commit',
+59 verbose git   '-F',
+59 verbose git   '/private/var/folders/j4/b3v5jf954239_s0k44fqf3lc0000gn/T/39252c4e-7b3f-497c-a444-b69d12ec7f73/lerna-commit.txt'
+59 verbose git ]
+60 error Error: Command failed: git commit -F /private/var/folders/j4/b3v5jf954239_s0k44fqf3lc0000gn/T/39252c4e-7b3f-497c-a444-b69d12ec7f73/lerna-commit.txt
+60 error husky > commit-msg (node v12.20.0)
+60 error ⧗   input: Publish
+60 error
+60 error  - example_sketches@0.0.5
+60 error  - rapid-sketch-cli@0.0.5
+60 error  - rapid-sketch@0.0.5
+60 error ✖   subject may not be empty [subject-empty]
+60 error ✖   type may not be empty [type-empty]
+60 error
+60 error ✖   found 2 problems, 0 warnings
+60 error ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+60 error
+60 error husky > commit-msg hook failed (add --no-verify to bypass)
+60 error
+60 error     at makeError (/Users/dreed/code/rapid-sketch/node_modules/execa/index.js:174:9)
+60 error     at /Users/dreed/code/rapid-sketch/node_modules/execa/index.js:278:16
+60 error     at processTicksAndRejections (internal/process/task_queues.js:97:5)

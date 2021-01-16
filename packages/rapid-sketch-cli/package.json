@@ -1,6 +1,6 @@
 {
   "name": "rapid-sketch-cli",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "author": "Dave Reed <dvreed77@gmail.com>",
   "homepage": "",
   "description": "CLI tool for rapid-sketch",
@@ -35,7 +35,7 @@
     "open": "7.0.4",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-glslify": "^0.1.0",
-    "rapid-sketch": "^0.0.3",
+    "rapid-sketch": "^0.0.5",
     "resolve-global": "^1.0.0"
   },
   "devDependencies": {

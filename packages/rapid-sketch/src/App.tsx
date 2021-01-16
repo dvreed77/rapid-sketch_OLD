@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { CommandBar } from "./components/CommandBar";
 import { Canvas } from "./Canvas";
 import { endStream, saveBlob, sendStreamBlob, startStream } from "./utils";
