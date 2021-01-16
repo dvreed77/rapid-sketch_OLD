@@ -27,6 +27,7 @@
     "@types/d3": "^6.2.0",
     "@types/jsts": "^0.17.3",
     "@types/mathjs": "^6.0.9",
+    "@types/seed-random": "^2.2.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.35.1",
     "rollup-plugin-babel": "^4.4.0",
