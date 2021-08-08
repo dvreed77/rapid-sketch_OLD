@@ -23,5 +23,10 @@
   },
   "dependencies": {
     "commitizen": "^4.2.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
