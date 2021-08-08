@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.6](https://github.com/dvreed77/rapid-sketch/compare/rapid-sketch-utils@0.0.5...rapid-sketch-utils@0.0.6) (2021-08-08)
+
+**Note:** Version bump only for package rapid-sketch-utils
+
+
+
+
+
 ## 0.0.5 (2021-08-08)
 
 
