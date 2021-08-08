@@ -1,4 +1,4 @@
-# Run a Sketch
+# Run a Sketch.
 
 ```
 npm start
