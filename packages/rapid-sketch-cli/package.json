@@ -6,6 +6,11 @@
   "description": "CLI tool for rapid-sketch",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dvreed77/rapid-sketch",
+    "directory": "packages/rapid-sketch-cli"
+  },
   "bin": {
     "rapid-sketch": "./dist/index.js"
   },
