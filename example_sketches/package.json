@@ -1,6 +1,6 @@
 {
   "name": "example_sketches",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "private": true,
   "keywords": [],
@@ -16,9 +16,9 @@
     "d3": "^6.3.1",
     "glsl-noise": "^0.0.0",
     "glslify-deps": "^1.3.2",
-    "rapid-sketch": "^0.0.5",
-    "rapid-sketch-cli": "^0.0.5",
-    "rapid-sketch-utils": "^0.0.4",
+    "rapid-sketch": "^0.0.6",
+    "rapid-sketch-cli": "^0.0.6",
+    "rapid-sketch-utils": "^0.0.5",
     "simplex-noise": "^2.4.0",
     "three": "^0.123.0"
   },
