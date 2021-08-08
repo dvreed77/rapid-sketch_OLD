@@ -25,5 +25,5 @@ node ../../packages/rapid-sketch-cli/dist/index.js kitchen.ts
 5. [master] After it is merged, the following steps are done within the master branch:
    Run the command npm run release (which will bump versions based on commit types, add commit descriptions to CHANGELOG.md, and create git tags according to the current version).
    Push changes and git tags to master branch using :
-   git push --follow-tags origin master
+   git push --follow-tags origin main
 6. Relax and enjoy 🍕
