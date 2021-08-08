@@ -8,10 +8,13 @@
     "commitlint": "^11.0.0",
     "husky": "^4.3.7",
     "lerna": "^3.22.1",
-    "postinstall": "opencollective-postinstall || exit 0"
+    "postinstall": "opencollective-postinstall || exit 0",
+    "standard-version": "^9.3.1"
   },
   "scripts": {
-    "start": "lerna run start --stream --parallel"
+    "start": "lerna run start --stream --parallel",
+    "commit": "git-cz",
+    "release": "standard-version"
   },
   "volta": {
     "node": "12.20.0"
